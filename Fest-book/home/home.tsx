@@ -14,7 +14,7 @@ export default function Home() {
             <li><Link href="#events" className="text-gray-600 hover:text-blue-600">Events</Link></li>
             <li><Link href="#contact" className="text-gray-600 hover:text-blue-600">Contact</Link></li>
           </ul>
-          <button className="md:hidden text-gray-600">☰</button>
+         
         </div>
       </nav>
 
