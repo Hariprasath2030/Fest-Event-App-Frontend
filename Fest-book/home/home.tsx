@@ -51,10 +51,7 @@ export default function Home() {
         <Link href="mailto:info@eventify.com" className="mt-6 inline-block px-6 py-3 bg-blue-500 text-white font-bold rounded-full">Email Us</Link>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white text-center py-4">
-        <p>&copy; 2025 Eventify. All rights reserved.</p>
-      </footer>
+     
     </div>
   );
 }
