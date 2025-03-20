@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< Updated upstream
     "@clerk/nextjs": "^6.12.6",
+=======
+    "@react-google-maps/api": "^2.20.6",
+>>>>>>> Stashed changes
     "firebase": "^11.4.0",
     "my-app": "file:",
     "next": "^15.2.3",

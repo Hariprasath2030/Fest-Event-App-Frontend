@@ -2,25 +2,25 @@
 import { useState } from "react";
 import { FaUser, FaCalendarAlt, FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
-import { UserButton, useUser } from '@clerk/nextjs';
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const {isSignedIn} = useUser();
+
   return (
     <div>
       {/* Navbar with Background Image */}
-      <nav
-      className="fixed w-full z-50 bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/home.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
+      <nav className="fixed w-full z-50 bg-cover bg-center bg-no-repeat " 
+      style={{ 
+    backgroundImage: "url('/home.jpg')", 
+    backgroundSize: "cover", 
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed" 
+  }}
     >
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        
         {/* Mobile Menu Button */}
-        <button
+        <button 
           className="md:hidden text-white focus:outline-none text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -31,65 +31,40 @@ export default function Home() {
         <div className="hidden md:flex justify-center items-center w-full">
           <ul className="flex space-x-6">
             <li>
-              <Link href="#about" className="flex items-center gap-2 text-white hover:text-gray-300">
+              <Link href="#about" className="flex items-center gap-2 text-white hover:text-white-300">
                 <FaUser /> About
               </Link>
             </li>
             <li>
-              <Link href="#events" className="flex items-center gap-2 text-white hover:text-gray-300">
+              <Link href="#events" className="flex items-center gap-2 text-white hover:text-white-300">
                 <FaCalendarAlt /> Events
               </Link>
             </li>
             <li>
-              <Link href="#contact" className="flex items-center gap-2 text-white hover:text-gray-300">
+              <Link href="#contact" className="flex items-center gap-2 text-white hover:text-white-300">
                 <FaEnvelope /> Contact
               </Link>
             </li>
           </ul>
         </div>
-
-        {/* Authentication */}
-        <div className="flex items-center space-x-4">
-          {isSignedIn ? (
-            <UserButton />
-          ) : (
-            <Link href="/sign-in">
-              <button className="bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700">
-                Login
-              </button>
-            </Link>
-          )}
-        </div>
       </div>
 
       {/* Mobile Dropdown Menu - Centered */}
       {menuOpen && (
-        <div className="md:hidden bg-gray-900 bg-opacity-90 p-4 text-center w-full">
-          <Link
-            href="#about"
-            className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2"
-            onClick={() => setMenuOpen(false)}
-          >
+        <div className="md:hidden bg-opacity-80 p-4 text-center w-full">
+          <Link href="#about" className="text-white hover:text-white-300 py-2 flex items-center justify-center gap-2">
             <FaUser /> About
           </Link>
-          <Link
-            href="#events"
-            className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="#events" className=" text-white hover:text-white-300 py-2 flex items-center justify-center gap-2">
             <FaCalendarAlt /> Events
           </Link>
-          <Link
-            href="#contact"
-            className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="#contact" className=" text-white hover:text-white-300 py-2 flex items-center justify-center gap-2">
             <FaEnvelope /> Contact
           </Link>
         </div>
       )}
     </nav>
-     {/* Hero Section with Full-Page Background */}
+      {/* Hero Section with Full-Page Background */}
       <section 
         className="flex flex-col justify-center items-center text-center min-h-screen text-white px-4"
         style={{ 
@@ -103,152 +78,208 @@ export default function Home() {
         
         <p className="mt-4 text-lg">From corporate gatherings to weddings, we make every event unforgettable.</p>
         <Link href="#events" className="mt-6 inline-block px-6 py-3 bg-white text-blue-500 font-bold rounded-full">Explore Events</Link>
-        <div className="mt-16 text-center">
-      <h1 className="text-4xl font-semibold text-white-900">Login</h1>
-      <p className="mt-4 text-lg text-white-600">
-        Please choose your role to log in and access the appropriate platform.
-      </p>
-
-      <div className="mt-8 space-x-4">
-        {/* Customer Login Button */}
-        <a 
-          href="/sign-in" 
-          className="inline-block rounded-full bg-indigo-500 px-8 py-3 font-medium text-white transition hover:bg-indigo-600"
-        >
-          Customer Login
-        </a>
-
-        {/* Organizer Login Button */}
-        <a 
-          href="/organizer-login" 
-          className="inline-block rounded-full bg-teal-500 px-8 py-3 font-medium text-white transition hover:bg-teal-600"
-        >
-          Organizer Login
-        </a>
-      </div>
-    </div>
+   
 
       </section>
       
-      <section className="bg-gray-50 py-16">
+      <section
+  className="relative py-30 bg-cover bg-center"
+  style={{ backgroundImage: "url('/login.jpg')" }}
+>
+  {/* Overlay for better readability */}
+  <div className="absolute inset-0 bg-black/50"></div>
+
+  <div className="relative z-10 text-center max-w-lg mx-auto text-white">
+    <h1 className="text-5xl font-semibold">Login</h1>
+    <p className="mt-4 text-lg">
+      Please choose your role to log in and access the appropriate platform.
+    </p>
+
+    <div className="mt-8 space-x-4">
+      {/* Customer Login Button */}
+      <a 
+        href="/customer-login" 
+        className="inline-block rounded-full bg-indigo-500 px-8 py-3 text-lg font-medium transition hover:bg-indigo-600"
+      >
+        Customer Login
+      </a>
+
+      {/* Organizer Login Button */}
+      <a 
+        href="/organizer-login" 
+        className="inline-block rounded-full bg-teal-500 px-8 py-3 text-lg font-medium transition hover:bg-teal-600"
+      >
+        Organizer Login
+      </a>
+    </div>
+  </div>
+</section>
+
+{/* About Section (Black Background) */}
+<section id="about" className="bg-black text-white py-20">
+
+
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-semibold text-center text-gray-900">About Us</h2>
-    <p className="mt-4 text-center text-lg text-gray-600">
-      We are a passionate team dedicated to delivering exceptional services that help businesses and
-      individuals succeed. With years of experience in our field, we aim to make a positive impact through
-      innovation, creativity, and unwavering commitment to quality.
+    <h2 className="text-3xl font-semibold text-center text-white-900">About Us</h2>
+    <p className="mt-4 text-center text-lg text-white-600">
+    Organizing a festival is no small feat, but with Fest Book, event management becomes smarter, faster, and more efficient.
+     Our platform empowers event organizers, venue managers, and vendors with cutting-edge tools to streamline planning, enhance engagement, and deliver unforgettable experiences.
     </p>
 
     
     <div className="mt-16 text-center">
-      <h3 className="text-2xl font-semibold text-gray-900">Why Choose Us?</h3>
-      <p className="mt-4 text-lg text-gray-600">
+      <h3 className="text-2xl font-semibold text-white-900">Why Choose Us?</h3>
+      <p className="mt-4 text-lg text-white-600">
         We take pride in delivering exceptional results for our clients. Here’s why you should choose us:
       </p>
-      <ul className="mt-8 space-y-4 text-lg text-gray-600">
-        <li>Proven track record of success in various industries.</li>
-        <li>Customized solutions tailored to your needs and goals.</li>
-        <li>Dedicated customer support available whenever you need it.</li>
-        <li>Cutting-edge technologies and innovative strategies.</li>
+      <ul className="mt-8 space-y-4 text-lg text-white-600">
+        <li>Our cutting-edge platform integrates event discovery, social networking, and real-time updates to enhance the festival experience.</li>
+        <li>Organizers gain valuable analytics to optimize events, improve audience engagement, and enhance future planning.</li>
+        <li>Whether it's a local cultural fest or an international music festival, Fest Book adapts to events of any scale.</li>
       </ul>
     </div>
   </div>
 </section>
 
-
-      {/* Event Highlights */}
-      <section id="events" className="container mx-auto py-20 px-6">
-        <h2 className="text-3xl font-bold text-center mb-10">Upcoming Events</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 shadow-md rounded-lg text-black">
-            <h3 className="text-xl font-semibold">Tech Conference 2025</h3>
-            <p className="text-gray-600 mt-2">Join industry leaders to explore the future of technology.</p>
-          </div>
-          <div className="bg-white p-6 shadow-md rounded-lg text-black">
-            <h3 className="text-xl font-semibold">Wedding Gala</h3>
-            <p className="text-gray-600 mt-2">Make your special day a dream come true with our expert planning.</p>
-          </div>
-          <div className="bg-white p-6 shadow-md rounded-lg text-black">
-            <h3 className="text-xl font-semibold">Music Festival</h3>
-            <p className="text-gray-600 mt-2">Experience live performances from top artists worldwide.</p>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section (White Background) */}
-      <section id="contact" className="bg-white text-black text-center py-20">
+      <section id="contact" className="bg-black text-white text-center py-20">
 
-  <footer className="bg-white`">
+  <footer className="bg-black">
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-semibold text-center text-gray-900">Event Management</h2>
-    <p className="mt-4 text-center text-lg text-gray-600">
+    <h2 className="text-3xl font-semibold text-center text-white-900">Event Management</h2>
+    <p className="mt-4 text-center text-lg text-white-600">
       Our event management services offer everything you need to make your next event a success. From
       planning and coordination to execution, we handle every detail with care and professionalism.
     </p>
 
     <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {/* Event Type */}
-      <div className="flex flex-col items-center bg-white p-6 shadow-md rounded-lg">
-        <h3 className="text-xl font-medium text-gray-900">Corporate Events</h3>
-        <p className="mt-4 text-gray-600">
-          Whether it's a conference, seminar, or corporate party, we specialize in managing corporate
-          events that leave a lasting impression.
-        </p>
-      </div>
-
-      {/* Event Type */}
-      <div className="flex flex-col items-center bg-white p-6 shadow-md rounded-lg">
-        <h3 className="text-xl font-medium text-gray-900">Weddings & Social Events</h3>
-        <p className="mt-4 text-gray-600">
-          We bring your vision to life with customized wedding and social event planning services, ensuring
-          a stress-free and memorable experience.
-        </p>
-      </div>
-
-      {/* Event Type */}
-      <div className="flex flex-col items-center bg-white p-6 shadow-md rounded-lg">
-        <h3 className="text-xl font-medium text-gray-900">Fundraisers & Galas</h3>
-        <p className="mt-4 text-gray-600">
-          We provide full-service event management for fundraisers and galas, creating impactful experiences
-          for donors and guests.
+       {/* Event Type */}
+    <div 
+       className="relative flex flex-col items-center justify-center h-48 md:h-60 lg:h-60 bg-cover bg-center text-white p-6 shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300"
+      style={{ backgroundImage: "url('/wedding.jpg')" }}
+    >
+      <div className="relative z-10 px-4">
+        <h3 className="text-2xl font-semibold">Wedding Music Artists</h3>
+        <p className="mt-3 text-lg text-white -200 leading-relaxed">
+        We arrange mela vaaithiyam, chenda melam for wedding.
         </p>
       </div>
     </div>
 
+      {/* Event Type */}
+    <div 
+      className="relative flex flex-col items-center justify-center h-48 md:h-60 lg:h-60 bg-cover bg-center text-white p-6 shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300"
+      style={{ backgroundImage: "url('/Photo & Video Shoot.jpg')" }}
+    >
+      <div className="relative z-10 px-4">
+        <h3 className="text-2xl font-semibold">Photo & Video Shoot</h3>
+        <p className="mt-3 text-lg text-white-200 leading-relaxed">
+        Make your event as wonderful memories by photo or videos
+        </p>
+      </div>
+    </div>
     
-    <div className="mt-16 text-center">
-      <h3 className="text-2xl font-semibold text-gray-900">Contact Us</h3>
-      <p className="mt-4 text-lg text-gray-600">
-        If you have any questions or would like to inquire about our event management services, don't hesitate
-        to reach out.
-      </p>
-      <form className="mt-8 max-w-lg mx-auto">
-        <input
-          className="w-full rounded-full border-gray-200 px-6 py-3 shadow-xs"
-          type="text"
-          placeholder="Your Name"
-          fdprocessedid="d9ddsh"
-        />
-        <input
-          className="mt-4 w-full rounded-full border-gray-200 px-6 py-3 shadow-xs"
-          type="email"
-          placeholder="Your Email"
-        />
-        <textarea
-          className="mt-4 w-full rounded-lg border-gray-200 px-6 py-3 shadow-xs"
-          placeholder="Your Message"
-        ></textarea>
-        <button
-          className="mt-4 block rounded-full bg-indigo-500 px-8 py-3 font-medium text-white transition hover:bg-indigo-600"
-          type="submit"
-        >
-          Send Message
-        </button>
-      </form>
+    {/* Event Type */}
+    <div 
+      className="relative flex flex-col items-center justify-center h-48 md:h-60 lg:h-60 bg-cover bg-center text-white p-6 shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300"
+      style={{ backgroundImage: "url('/Food Supply.jpg')" }}
+    >
+      <div className="relative z-10 px-4">
+        <h3 className="text-2xl font-semibold">Food Supply</h3>
+        <p className="mt-3 text-lg text-white-200 leading-relaxed">
+        We provide a multi - cuisine catering service.
+        </p>
+      </div>
     </div>
+
+{/* Event Type */}
+<div 
+      className="relative flex flex-col items-center justify-center h-48 md:h-60 lg:h-60 bg-cover bg-center text-white p-6 shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300"
+      style={{ backgroundImage: "url('/Invitation Cards.jpg')" }}
+    >
+      <div className="relative z-10 px-4">
+        <h3 className="text-2xl font-semibold">Invitation Cards</h3>
+        <p className="mt-3 text-lg text-white-200 leading-relaxed">
+        We design your invitation cards with new designs.
+        </p>
+      </div>
+    </div>
+
+       {/* Event Type */}
+    <div 
+       className="relative flex flex-col items-center justify-center h-48 md:h-60 lg:h-60 bg-cover bg-center text-white p-6 shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300"
+      style={{ backgroundImage: "url('/Stage Decorations.jpg')" }}
+    >
+      <div className="relative z-10 px-4">
+        <h3 className="text-2xl font-semibold">Stage Decorations</h3>
+        <p className="mt-3 text-lg text-white-200 leading-relaxed">
+        Fest Event Management decorates your stage with themes or simple flowers.
+        </p>
+      </div>
+    </div>
+    
+    {/* Event Type */}
+    <div 
+       className="relative flex flex-col items-center justify-center h-48 md:h-60 lg:h-60 bg-cover bg-center text-white p-6 shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300"
+      style={{ backgroundImage: "url('/vehicle.jpg')" }}
+    >
+      <div className="relative z-10 px-4">
+        <h3 className="text-2xl font-semibold">Vehicle Arrangement</h3>
+        <p className="mt-3 text-lg text-white-200 leading-relaxed">
+        We decorate your wedding car and also transport facility.
+        </p>
+      </div>
+    </div>
+    </div>
+    <br></br>
+
+    <section
+  className="relative py-16 bg-cover bg-center"
+  style={{ backgroundImage: "url('/sign.jpg')" }}
+>
+  {/* Overlay for better readability */}
+  <div className="absolute inset-0 bg-black/50"></div>
+
+  <div className="relative z-10 text-center max-w-lg mx-auto text-white">
+    <h3 className="text-2xl font-semibold">Contact Us</h3>
+    <p className="mt-4 text-lg">
+      If you have any questions or would like to inquire about our event management services, don't hesitate
+      to reach out.
+    </p>
+
+    <form className="mt-8 max-w-lg mx-auto space-y-4">
+      <input
+        className="w-full rounded-full border border-white px-6 py-3 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 text-white`"
+        type="text"
+        placeholder="Your Name"
+        required
+      />
+      <input
+        className="w-full rounded-full border border-white px-6 py-3 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 text-white"
+        type="email"
+        placeholder="Your Email"
+        required
+      />
+      <textarea
+        className="w-full rounded-lg border border-white px-6 py-3 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 text-white"
+        placeholder="Your Message"
+        rows={4}
+        required
+      ></textarea>
+      <button
+        className="block w-full rounded-full bg-indigo-500 px-8 py-3 font-medium text-white transition hover:bg-indigo-600"
+        type="submit"
+      >
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
   </div>
 
-<footer className="bg-white">
+<footer className="bg-black">
   <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <div>
@@ -258,7 +289,7 @@ export default function Home() {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-teal-700 transition hover:text-teal-700/75"
+              className="text-white-700 transition hover:text-white-700/75"
             >
               <span className="sr-only">Facebook</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -276,7 +307,7 @@ export default function Home() {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-teal-700 transition hover:text-teal-700/75"
+              className="text-white-700 transition hover:text-white-700/75"
             >
               <span className="sr-only">Instagram</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -294,7 +325,7 @@ export default function Home() {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-teal-700 transition hover:text-teal-700/75"
+              className="text-white-700 transition hover:text-white-700/75"
             >
               <span className="sr-only">Twitter</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -310,7 +341,7 @@ export default function Home() {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-teal-700 transition hover:text-teal-700/75"
+              className="text-white-700 transition hover:text-white-700/75"
             >
               <span className="sr-only">GitHub</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -328,7 +359,7 @@ export default function Home() {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-teal-700 transition hover:text-teal-700/75"
+              className="text-white-700 transition hover:text-white-700/75"
             >
               <span className="sr-only">Dribbble</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -345,67 +376,67 @@ export default function Home() {
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
         <div className="text-center sm:text-left">
-          <p className="text-lg font-medium text-gray-900">About Us</p>
+          <p className="text-lg font-medium text-white-900">About Us</p>
 
           <ul className="mt-8 space-y-4 text-sm">
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
+              <a className="text-white-700 transition hover:text-white-700/75" href="#">
                 Company History
               </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
+              <a className="text-white-700 transition hover:text-white-700/75" href="#">
                 Meet the Team
               </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
+              <a className="text-white-700 transition hover:text-white-700/75" href="#">
                 Employee Handbook
               </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Careers </a>
+              <a className="text-white-700 transition hover:text-white-700/75" href="#"> Careers </a>
             </li>
           </ul>
         </div>
 
         <div className="text-center sm:text-left">
-          <p className="text-lg font-medium text-gray-900">Our Services</p>
+          <p className="text-lg font-medium text-white-900">Our Services</p>
 
           <ul className="mt-8 space-y-4 text-sm">
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
+              <a className="text-white-700 transition hover:text-white-700/75" href="#">
                 Web Development
               </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Web Design </a>
+              <a className="text-white-700 transition hover:text-white-700/75" href="#"> Web Design </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Marketing </a>
+              <a className="text-white-700 transition hover:text-white-700/75" href="#"> Marketing </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Google Ads </a>
+              <a className="text-white-700 transition hover:text-white-700/75" href="#"> Google Ads </a>
             </li>
           </ul>
         </div>
 
         <div className="text-center sm:text-left">
-          <p className="text-lg font-medium text-gray-900">Helpful Links</p>
+          <p className="text-lg font-medium text-white-900">Helpful Links</p>
 
           <ul className="mt-8 space-y-4 text-sm">
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> FAQs </a>
+              <a className="text-white-700 transition hover:text-white-700/75" href="#"> FAQs </a>
             </li>
 
             <li>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Support </a>
+              <a className="text-white-700 transition hover:text-white-700/75" href="#"> Support </a>
             </li>
 
             <li>
@@ -413,15 +444,15 @@ export default function Home() {
                 className="group flex justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
                 href="#"
               >
-                <span className="text-gray-700 transition group-hover:text-gray-700/75">
+                <span className="text-white-700 transition group-hover:text-white-700/75">
                   Live Chat
                 </span>
 
                 <span className="relative flex size-2">
                   <span
-                    className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"
+                    className="absolute inline-flex h-full w-full animate-ping rounded-full bg--400 opacity-75"
                   ></span>
-                  <span className="relative inline-flex size-2 rounded-full bg-teal-500"></span>
+                  <span className="relative inline-flex size-2 rounded-full bg-white-500"></span>
                 </span>
               </a>
             </li>
@@ -429,7 +460,7 @@ export default function Home() {
         </div>
 
         <div className="text-center sm:text-left">
-          <p className="text-lg font-medium text-gray-900">Contact Us</p>
+          <p className="text-lg font-medium text-white-900">Contact Us</p>
 
           <ul className="mt-8 space-y-4 text-sm">
             <li>
@@ -439,7 +470,7 @@ export default function Home() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="size-5 shrink-0 text-gray-900"
+                  className="size-5 shrink-0 text-white-900"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -452,7 +483,7 @@ export default function Home() {
                   />
                 </svg>
 
-                <span className="flex-1 text-gray-700">john@doe.com</span>
+                <span className="flex-1 text-white-700">john@doe.com</span>
               </a>
             </li>
 
@@ -463,7 +494,7 @@ export default function Home() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="size-5 shrink-0 text-gray-900"
+                  className="size-5 shrink-0 text-white-900"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -476,7 +507,7 @@ export default function Home() {
                   />
                 </svg>
 
-                <span className="flex-1 text-gray-700">0123456789</span>
+                <span className="flex-1 text-white-700">0123456789</span>
               </a>
             </li>
 
@@ -485,7 +516,7 @@ export default function Home() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-5 shrink-0 text-gray-900"
+                className="size-5 shrink-0 text-white-900"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -503,7 +534,7 @@ export default function Home() {
                 />
               </svg>
 
-              <address className="-mt-0.5 flex-1 not-italic text-gray-700">
+              <address className="-mt-0.5 flex-1 not-italic text-white-700">
                 213 Lane, London, United Kingdom
               </address>
             </li>
@@ -514,11 +545,11 @@ export default function Home() {
 
     <div className="mt-12 border-t border-gray-100 pt-6">
       <div className="text-center sm:flex sm:justify-between sm:text-left">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-white-500">
           <span className="block sm:inline">All rights reserved.</span>
 
           <a
-            className="inline-block text-teal-600 underline transition hover:text-teal-600/75"
+            className="inline-block text-white-600 underline transition hover:text-white-600/75"
             href="#"
           >
             Terms & Conditions
@@ -527,14 +558,14 @@ export default function Home() {
           <span>&middot;</span>
 
           <a
-            className="inline-block text-teal-600 underline transition hover:text-teal-600/75"
+            className="inline-block text-white-600 underline transition hover:text-white-600/75"
             href="#"
           >
             Privacy Policy
           </a>
         </p>
 
-        <p className="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">&copy; 2022 Company Name</p>
+        <p className="mt-4 text-sm text-white-500 sm:order-first sm:mt-0">&copy; 2022 Company Name</p>
       </div>
     </div>
   </div>
