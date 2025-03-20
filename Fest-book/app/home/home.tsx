@@ -2,25 +2,25 @@
 import { useState } from "react";
 import { FaUser, FaCalendarAlt, FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
-
+import { UserButton, useUser } from '@clerk/nextjs';
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const {isSignedIn} = useUser();
   return (
     <div>
       {/* Navbar with Background Image */}
-      <nav className="fixed w-full z-50 bg-cover bg-center bg-no-repeat " 
-      style={{ 
-    backgroundImage: "url('/home.jpg')", 
-    backgroundSize: "cover", 
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed" 
-  }}
+      <nav
+      className="fixed w-full z-50 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/home.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
     >
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
-        
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden text-white focus:outline-none text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -47,24 +47,49 @@ export default function Home() {
             </li>
           </ul>
         </div>
+
+        {/* Authentication */}
+        <div className="flex items-center space-x-4">
+          {isSignedIn ? (
+            <UserButton />
+          ) : (
+            <Link href="/sign-in">
+              <button className="bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700">
+                Login
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
 
       {/* Mobile Dropdown Menu - Centered */}
       {menuOpen && (
-        <div className="md:hidden bg-opacity-80 p-4 text-center w-full">
-          <Link href="#about" className="text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2">
+        <div className="md:hidden bg-gray-900 bg-opacity-90 p-4 text-center w-full">
+          <Link
+            href="#about"
+            className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
             <FaUser /> About
           </Link>
-          <Link href="#events" className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2">
+          <Link
+            href="#events"
+            className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
             <FaCalendarAlt /> Events
           </Link>
-          <Link href="#contact" className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2">
+          <Link
+            href="#contact"
+            className=" text-white hover:text-gray-300 py-2 flex items-center justify-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
             <FaEnvelope /> Contact
           </Link>
         </div>
       )}
     </nav>
-      {/* Hero Section with Full-Page Background */}
+     {/* Hero Section with Full-Page Background */}
       <section 
         className="flex flex-col justify-center items-center text-center min-h-screen text-white px-4"
         style={{ 
@@ -87,7 +112,7 @@ export default function Home() {
       <div className="mt-8 space-x-4">
         {/* Customer Login Button */}
         <a 
-          href="/customer-login" 
+          href="/sign-in" 
           className="inline-block rounded-full bg-indigo-500 px-8 py-3 font-medium text-white transition hover:bg-indigo-600"
         >
           Customer Login
@@ -153,7 +178,7 @@ export default function Home() {
       {/* Contact Section (White Background) */}
       <section id="contact" className="bg-white text-black text-center py-20">
 
-  <footer className="bg-white">
+  <footer className="bg-white`">
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <h2 className="text-3xl font-semibold text-center text-gray-900">Event Management</h2>
     <p className="mt-4 text-center text-lg text-gray-600">
@@ -202,6 +227,7 @@ export default function Home() {
           className="w-full rounded-full border-gray-200 px-6 py-3 shadow-xs"
           type="text"
           placeholder="Your Name"
+          fdprocessedid="d9ddsh"
         />
         <input
           className="mt-4 w-full rounded-full border-gray-200 px-6 py-3 shadow-xs"
