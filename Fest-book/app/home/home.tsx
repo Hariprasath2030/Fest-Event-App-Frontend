@@ -2,10 +2,10 @@
 import { useState } from "react";
 import { FaUser, FaCalendarAlt, FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
-
+import { UserButton, useUser } from "@clerk/nextjs";
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { isSignedIn } = useUser();
   return (
     <div>
       {/* Navbar with Background Image */}
@@ -46,6 +46,19 @@ export default function Home() {
               </Link>
             </li>
           </ul>
+        </div>
+        
+        {/* Login/User Button */}
+        <div className="flex items-center space-x-4">
+          {isSignedIn ? (
+            <UserButton />  
+          ) : (
+            <Link href="/sign-in">
+              <button className="bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700">
+                Log in
+              </button>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -98,7 +111,7 @@ export default function Home() {
     <div className="mt-8 space-x-4">
       {/* Customer Login Button */}
       <a 
-        href="/customer-login" 
+        href="/sign-in" 
         className="inline-block rounded-full bg-indigo-500 px-8 py-3 text-lg font-medium transition hover:bg-indigo-600"
       >
         Customer Login

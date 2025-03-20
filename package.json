@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Whitedevil2004r27/Fest-Event-App-Frontend/issues"
   },
-  "homepage": "https://github.com/Whitedevil2004r27/Fest-Event-App-Frontend#readme"
+  "homepage": "https://github.com/Whitedevil2004r27/Fest-Event-App-Frontend#readme",
+  "dependencies": {
+    "fest-event-app-frontend": "file:"
+  }
 }
