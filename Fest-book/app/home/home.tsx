@@ -54,9 +54,6 @@ export default function Home() {
             <UserButton />  
           ) : (
             <Link href="/sign-in">
-              <button className="bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700">
-                Log in
-              </button>
             </Link>
           )}
         </div>
@@ -90,7 +87,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-6xl font-bold">Plan & Manage Your Events Seamlessly</h1>
         
         <p className="mt-4 text-lg">From corporate gatherings to weddings, we make every event unforgettable.</p>
-        <Link href="#events" className="mt-6 inline-block px-6 py-3 bg-white text-blue-500 font-bold rounded-full">Explore Events</Link>
+        <Link href="/" className="mt-6 inline-block px-6 py-3 bg-white text-blue-500 font-bold rounded-full">Explore Events</Link>
    
 
       </section>
@@ -119,7 +116,7 @@ export default function Home() {
 
       {/* Organizer Login Button */}
       <a 
-        href="/organizer-login" 
+        href="/sign-in-organizer" 
         className="inline-block rounded-full bg-teal-500 px-8 py-3 text-lg font-medium transition hover:bg-teal-600"
       >
         Organizer Login
@@ -266,6 +263,7 @@ export default function Home() {
         className="w-full rounded-full border border-white px-6 py-3 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 text-white`"
         type="text"
         placeholder="Your Name"
+         fdprocessedid="m7jzv1"
         required
       />
       <input
