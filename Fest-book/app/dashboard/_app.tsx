@@ -2,7 +2,9 @@ import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-function MyApp({ Component, pageProps }) {
+import { AppProps } from 'next/app';
+
+function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
@@ -14,7 +16,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}
     >
       <Component {...pageProps} />
     </ClerkProvider>

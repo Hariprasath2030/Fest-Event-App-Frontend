@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
+const nextConfig: import('next').NextConfig = {
   experimental: {
-    appDir: true, // Ensure this is enabled
+    serverActions: {}, // Ensure this is an object, not a boolean
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
