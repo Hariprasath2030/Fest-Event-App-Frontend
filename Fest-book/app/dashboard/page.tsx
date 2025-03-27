@@ -1,9 +1,12 @@
 'use client';  
 
 import { useState, useEffect } from 'react';
+import { FaBars } from 'react-icons/fa'; // Import FaBars icon from react-icons
+import { IoMdClose as X } from 'react-icons/io'; // Import X icon from react-icons
 import { UserButton } from '@clerk/nextjs';
 
 function DashboardHeader() {
+  const [isOpen, setIsOpen] = useState(false); // State for sidebar visibility
   const [eventDetails, setEventDetails] = useState({
     name: '',
     email: '',
@@ -63,13 +66,67 @@ function DashboardHeader() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white">
 
-      {/* Header */}
-      <header className="flex justify-between items-center px-8 py-6 text-white h-24 w-full bg-black/70 shadow-lg rounded-xl">
-        <div className="text-4xl font-extrabold tracking-wide hover:text-blue-400 transition duration-300">
-          Event Management
+<header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
+      {/* Sidebar Button */}
+      <div className="flex items-center">
+        <button onClick={() => setIsOpen(true)} >
+          <FaBars size={32} className="text-white hover:text-blue-400 transition" />
+        </button>
+      </div>
+
+      {/* Title */}
+      <h1 className="ml-4 text-4xl font-extrabold tracking-wide hover:text-blue-400 transition duration-300 cursor-pointer">
+        Event Management
+      </h1>
+
+      {/* User Button */}
+      <div className="ml-auto flex items-center gap-4">
+        <div className="hover:bg-gray-800 transition rounded-lg px-4 py-2">
+          <UserButton />
         </div>
-        <UserButton />
-      </header>
+        <button className="bg-blue-1000 hover:bg-blue-600 text-white text-lg px-4 py-2 rounded-lg transition">Sign Out</button>
+      </div>
+
+
+      {/* Sidebar Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsOpen(false)}
+        ></div>
+      )}
+
+      {/* Sidebar */}
+      <nav
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-900 shadow-lg transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-50`}
+      >
+        {/* Close Button */}
+        <button onClick={() => setIsOpen(false)} className="absolute top-5 right-5">
+          <X size={32} className="text-white hover:text-red-400 transition" />
+        </button>
+
+        {/* Navigation Links */}
+        <ul className="mt-20 space-y-6 text-white text-lg font-semibold px-6">
+          <li className="hover:text-blue-400 transition">
+            <a href="#">Dashboard</a>
+          </li>
+          <li className="hover:text-blue-400 transition">
+            <a href="#">Events</a>
+          </li>
+          <li className="hover:text-blue-400 transition">
+            <a href="/dashboard/bookings">Bookings</a>
+          </li>
+          <li className="hover:text-blue-400 transition">
+            <a href="#">Settings</a>
+          </li>
+          <li className="hover:text-blue-400 transition mt-6">
+            <button className="w-full text-left px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition">Sign Out</button>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
       {/* Event Registration Section */}
       <h2 className="text-4xl font-bold text-center my-10">Event Registration</h2>

@@ -86,7 +86,7 @@ export default function Home() {
           backgroundAttachment: "fixed" // Ensures smooth scrolling effect
         }}
       >
-        <div className="text-center bg-gradient-to-b from-gray-900 to-gray-800 p-10 rounded-lg shadow-xl">
+        <div className="text-center bg-gradient-to-b ">
   <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
     Plan & Manage Your Events Seamlessly
   </h1>
@@ -102,24 +102,7 @@ export default function Home() {
     Explore Events
   </Link> 
 
-  {/* Dynamic Event Types Section */}
-  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {[
-      { title: "Corporate Events", bg: "bg-blue-500", hover: "hover:bg-blue-600" },
-      { title: "Weddings", bg: "bg-pink-500", hover: "hover:bg-pink-600" },
-      { title: "Concerts", bg: "bg-purple-500", hover: "hover:bg-purple-600" },
-    ].map((event, index) => (
-      <div 
-        key={index}
-        className={`p-6 rounded-lg text-white font-medium text-lg text-center shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl ${event.bg} ${event.hover}`}
-      >
-        {event.title}
-      </div>
-    ))}
-  </div>
 </div>
-
-
       </section>
       
       <section
