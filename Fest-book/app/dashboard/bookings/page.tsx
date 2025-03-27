@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings, FiLogOut } from "react-icons/fi";
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Bookings() {
   const [isOpen, setIsOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [eventDetails, setEventDetails] = useState({
     name: "",
     email: "",
@@ -18,18 +20,62 @@ export default function Bookings() {
     { _id: string; name: string; email: string; eventName: string; eventDate: string; eventImage: string }[]
   >([]);
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/events");
+        const data = await response.json();
+        setEvents(data.events);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEventDetails({ ...eventDetails, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setEvents([...events, { ...eventDetails, _id: Date.now().toString() }]);
-    setEventDetails({ name: "", email: "", eventName: "", eventDate: "", eventImage: "" });
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventDetails),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to register event");
+      }
+  
+      const newEvent = await response.json();
+  
+      setEvents([...events, newEvent]); // Update the UI with the new event
+      setEventDetails({ name: "", email: "", eventName: "", eventDate: "", eventImage: "" });
+  
+      alert("Registered successfully!");
+    } catch (error) {
+      console.error("Error registering event:", error);
+      alert("Error registering event");
+    }
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white">
+      {/* Success Popup */}
+      {successMessage && (
+        <div className="fixed top-5 right-5 bg-green-600 text-white px-6 py-3 rounded-md shadow-lg transition-opacity animate-fade-in-out">
+          {successMessage}
+        </div>
+      )}
+
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
         <button onClick={() => setIsOpen(true)}>
@@ -38,11 +84,10 @@ export default function Bookings() {
         <h1 className="text-2xl font-bold">Bookings</h1>
       </header>
 
-      {/* Massive Sidebar */}
+      {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full w-[240px] bg-gray-900 text-white z-50 $vw] bg-gray-900 text-white z-50 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out shadow-2xl`}
+        className={`fixed top-0 left-0 h-full w-[240px] bg-gray-900 text-white z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out shadow-2xl`}
       >
         <div className="flex justify-between items-center p-6 border-b border-gray-700">
           <h1 className="text-3xl font-bold">FestBook</h1>
@@ -51,23 +96,12 @@ export default function Bookings() {
           </button>
         </div>
 
-        {/* User Profile */}
-        <div className="flex flex-col items-center py-6 border-b border-gray-700">
-          <img
-            src="https://i.pravatar.cc/150?img=12"
-            alt="User Avatar"
-            className="w-20 h-20 rounded-full border-4 border-blue-500"
-          />
-          <h2 className="text-xl font-semibold mt-3">John Doe</h2>
-          <p className="text-gray-400 text-sm">Event Organizer & Enthusiast</p>
-        </div>
-
         {/* Sidebar Links */}
         <ul className="mt-6 px-8 space-y-6 text-lg">
           {[
-            { name: "Home", icon: <FiHome size={24} />, href: "/" },
+            { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
             { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
-            { name: "Bookings", icon: <FiBook size={24} />, href: "/bookings" },
+            { name: "Bookings", icon: <FiBook size={24} />, href: "/dashboard/bookings" },
             { name: "Profile", icon: <FiUser size={24} />, href: "/profile" },
             { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
           ].map((link) => (
@@ -82,10 +116,11 @@ export default function Bookings() {
 
         {/* Logout Button */}
         <div className="absolute bottom-10 left-10">
-          <button className="flex items-center space-x-3 text-red-400 hover:text-red-600 transition">
-            <FiLogOut size={24} />
-            <span>Logout</span>
-          </button>
+          <div className="ml-auto flex items-center gap-4">
+            <div className="hover:bg-gray-800 transition rounded-lg px-4 py-2">
+              <UserButton />
+            </div>
+          </div>
         </div>
       </nav>
 
@@ -149,4 +184,3 @@ export default function Bookings() {
     </div>
   );
 }
-

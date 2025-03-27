@@ -12,6 +12,7 @@ export default function Page() {
           alt="Fest Book"
           className="absolute inset-0 w-full h-full object-cover"
           quality={100}
+          layout="fill"
         />
       </div>
 

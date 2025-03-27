@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { FaBars } from 'react-icons/fa'; // Import FaBars icon from react-icons
 import { IoMdClose as X } from 'react-icons/io'; // Import X icon from react-icons
 import { UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+import { FiBook, FiCalendar, FiHome, FiSettings, FiUser, FiX } from 'react-icons/fi';
 
 function DashboardHeader() {
   const [isOpen, setIsOpen] = useState(false); // State for sidebar visibility
@@ -84,7 +86,6 @@ function DashboardHeader() {
         <div className="hover:bg-gray-800 transition rounded-lg px-4 py-2">
           <UserButton />
         </div>
-        <button className="bg-blue-1000 hover:bg-blue-600 text-white text-lg px-4 py-2 rounded-lg transition">Sign Out</button>
       </div>
 
 
@@ -102,29 +103,30 @@ function DashboardHeader() {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out z-50`}
       >
-        {/* Close Button */}
-        <button onClick={() => setIsOpen(false)} className="absolute top-5 right-5">
-          <X size={32} className="text-white hover:text-red-400 transition" />
-        </button>
+            <div className="flex justify-between items-center p-6 border-b border-gray-700">
+                <h1 className="text-3xl font-bold">FestBook</h1>
+                <button onClick={() => setIsOpen(false)}>
+                  <FiX size={28} className="text-white hover:text-red-500 transition" />
+                </button>
+              </div>
 
-        {/* Navigation Links */}
-        <ul className="mt-20 space-y-6 text-white text-lg font-semibold px-6">
-          <li className="hover:text-blue-400 transition">
-            <a href="#">Dashboard</a>
-          </li>
-          <li className="hover:text-blue-400 transition">
-            <a href="#">Events</a>
-          </li>
-          <li className="hover:text-blue-400 transition">
-            <a href="/dashboard/bookings">Bookings</a>
-          </li>
-          <li className="hover:text-blue-400 transition">
-            <a href="#">Settings</a>
-          </li>
-          <li className="hover:text-blue-400 transition mt-6">
-            <button className="w-full text-left px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition">Sign Out</button>
-          </li>
-        </ul>
+         {/* Sidebar Links */}
+                <ul className="mt-6 px-8 space-y-6 text-lg">
+                  {[
+                    { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
+                    { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
+                    { name: "Bookings", icon: <FiBook size={24} />, href: "/dashboard/bookings" },
+                    { name: "Profile", icon: <FiUser size={24} />, href: "/profile" },
+                    { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
+                  ].map((link) => (
+                    <li key={link.name}>
+                      <Link href={link.href} className="flex items-center space-x-4 hover:text-blue-400 transition">
+                        {link.icon}
+                        <span>{link.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
       </nav>
     </header>
 
@@ -152,39 +154,7 @@ function DashboardHeader() {
         ))}
       </div>
 
-      {/* Registration Form */}
-      <div className="flex justify-center items-center mt-12">
-        <div className="bg-gray-900 p-8 rounded-xl shadow-xl w-full max-w-3xl">
-          <h2 className="text-3xl font-bold text-center mb-6">Register for an Event</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {[
-              { id: "name", type: "text", label: "Full Name", placeholder: "Enter your full name" },
-              { id: "email", type: "email", label: "Email Address", placeholder: "Enter your email" },
-              { id: "eventName", type: "text", label: "Event Name", placeholder: "Enter the event name" },
-              { id: "eventDate", type: "date", label: "Event Date", placeholder: "" },
-              { id: "eventImage", type: "url", label: "Event Image URL", placeholder: "Enter event image URL" }
-            ].map((input) => (
-              <div key={input.id}>
-                <label htmlFor={input.id} className="block text-sm font-medium">{input.label}</label>
-                <input
-                  type={input.type}
-                  id={input.id}
-                  name={input.id}
-                  value={eventDetails[input.id as keyof typeof eventDetails]}
-                  onChange={handleInputChange}
-                  className="mt-2 p-3 w-full border border-gray-700 rounded-md bg-gray-800 text-white focus:border-blue-500 focus:ring focus:ring-blue-300"
-                  placeholder={input.placeholder}
-                  required
-                />
-              </div>
-            ))}
-            <button className="w-full p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
-              Register Event
-            </button>
-          </form>
-        </div>
-      </div>
-
+     
       {/* Registered Events */}
       <h2 className="text-4xl font-semibold text-center my-10">Registered Events</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
