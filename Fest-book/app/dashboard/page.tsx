@@ -1,8 +1,7 @@
 'use client';  
 
 import { useState, useEffect } from 'react';
-import { FaBars } from 'react-icons/fa'; // Import FaBars icon from react-icons
-import { IoMdClose as X } from 'react-icons/io'; // Import X icon from react-icons
+import { FaBars } from 'react-icons/fa'; // Import X icon from react-icons
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { FiBook, FiCalendar, FiHome, FiSettings, FiUser, FiX } from 'react-icons/fi';
