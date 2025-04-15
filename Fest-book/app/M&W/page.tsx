@@ -26,7 +26,7 @@ export default function Events() {
         <button onClick={() => setIsOpen(true)}>
           <FaBars size={32} className="text-white hover:text-purple-400 transition" />
         </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">Event Registration</h2>
+        <h2 className="text-4xl font-bold text-center mx-auto my-10">Marriage & Wedding</h2>
       </header>
 
       {/* Massive Sidebar */}
@@ -44,6 +44,7 @@ export default function Events() {
         <ul className="mt-6 px-8 space-y-6 text-lg">
           {[{ name: "Home", icon: <FiHome size={24} />, href: "home" },
             { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
+            { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
             { name: "Bookings", icon: <FiBook size={24} />, href: "/bookings" },
             { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
           ].map((link) => (
@@ -58,41 +59,37 @@ export default function Events() {
       </nav>
 
 {/* Event Registration Section */}
-      <h2 className="text-4xl font-bold text-center my-10">All Types of Events</h2>
+      <h2 className="text-4xl font-bold text-center my-10"></h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {/* Event Cards with Gradients */}
         {[
-  { title: "Marriage & Wedding", img: "/wedding.jpg", desc: "Mela vaaithiyam, chenda melam for weddings.", link: "/M&W" },
-  { title: "House Warming", img: "/house warming.jpg", desc: "Multi-cuisine catering services available.", link: "/H&W" },
-  { title: "Birthday Party", img: "/birthday party.jpg", desc: "Multi-cuisine catering services available.", link: "/B&P" },
-  { title: "Puberty Function", img: "/Puberty Function.png", desc: "Wedding car decoration & transport services.", link: "/P&F" },
-  { title: "Anniversaries", img: "/Anniversary.jpg", desc: "Make your special day memorable.", link: "/events/anniversaries" },
-  { title: "Engagements", img: "/Engagement.jpg", desc: "Celebrate your love with a grand engagement.", link: "/events/engagements" },
-  { title: "Baby Showers", img: "/Baby Shower.jpg", desc: "Celebrate the arrival of your little one.", link: "/events/baby-showers" },
-  { title: "Graduation Parties", img: "/Graduation.jpg", desc: "Celebrate your academic achievements.", link: "/events/graduation-parties" },
-  
-
-  
-  
-].map((event, index) => (
-  <Link href={event.link} key={index} passHref>
-    <div className="relative overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 cursor-pointer">
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80"></div>
-      <img src={event.img} alt={event.title} className="w-full h-48 object-cover rounded-xl" />
-      <div className="absolute bottom-0 p-4">
-        <h3 className="text-2xl font-semibold text-white">{event.title}</h3>
-        <p className="text-white text-sm">{event.desc}</p>
-      </div>
-    </div>
-  </Link>
-))}
+          
+          { title: "Photography & Videography", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
+          { title: "DJ & Sound Systems", img: "/DJ & Sound.jpg", desc: "Professional DJ services for all events." },
+          {title: "Beautician",img: "/beautician.jpg",desc: "Bridal makeup, hairstyling & grooming services."},
+          { title: "Floral Decorations", img: "/floral.jpg", desc: "Beautiful floral arrangements for your event." },
+          { title: "Invitation Cards", img: "/Invitation Cards.jpg", desc: "Design custom invitation cards." },
+          { title: "Food Supply", img: "/Food Supply.jpg", desc: "Multi-cuisine catering services available." },
+          { title: "Stage Decorations", img: "/Stage Decorations.jpg", desc: "Stage decoration with floral & themes." },
+          { title: "Vehicle Arrangement", img: "/vehicle.jpg", desc: "Wedding car decoration & transport services." }
+          
+        ].map((event, index) => (
+          <div key={index} className="relative overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80"></div>
+            <img src={event.img} alt={event.title} className="w-full h-48 object-cover rounded-xl" />
+            <div className="absolute bottom-0 p-4">
+              <h3 className="text-2xl font-semibold">{event.title}</h3>
+              <p className="text-white text-sm">{event.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
      
 
       {/* Registered Events */}
       <div>
-        <h2 className="text-4xl font-semibold text-center my-10">Upcoming Events</h2>
+        <h2 className="text-4xl font-semibold text-center my-10"></h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
           {events.map((event) => (
             <div key={event.id} className="relative overflow-hidden rounded-xl shadow-lg min-h-[250px] flex flex-col justify-end p-4 bg-cover bg-center" style={{ backgroundImage: `url(${event.image})` }}>
