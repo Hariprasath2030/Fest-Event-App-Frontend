@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FaBars } from 'react-icons/fa';
-import { FiHome, FiCalendar, FiBook, FiUser, FiX } from "react-icons/fi";
+import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings } from "react-icons/fi";
 import Link from "next/link";
 
 export default function Events() {
@@ -30,18 +30,22 @@ export default function Events() {
       </header>
 
       {/* Massive Sidebar */}
-      <nav className={`fixed top-0 left-0 h-full w-[50vw] bg-gray-900 text-white z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out shadow-2xl`}>
-        <div className="flex justify-between items-center p-4">
-          <h1 className="text-2xl font-bold">FestBook</h1>
-          <button onClick={() => setIsOpen(false)}>
-            <FiX size={24} />
-          </button>
-        </div>
-        <ul className="space-y-4 px-4">
-          {[{ name: "Home", icon: <FiHome size={24} />, href: "/" },
-            { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
+      <nav
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-900 shadow-lg transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-50`}
+      >
+            <div className="flex justify-between items-center p-6 border-b border-gray-700">
+                <h1 className="text-3xl font-bold">FestBook</h1>
+                <button onClick={() => setIsOpen(false)}>
+                  <FiX size={28} className="text-white hover:text-red-500 transition" />
+                </button>
+              </div>
+        <ul className="mt-6 px-8 space-y-6 text-lg">
+          {[{ name: "Home", icon: <FiHome size={24} />, href: "home" },
+            { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
             { name: "Bookings", icon: <FiBook size={24} />, href: "/bookings" },
-            { name: "Customers", icon: <FiUser size={24} />, href: "/customers" }
+            { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
           ].map((link) => (
             <li key={link.name}>
               <Link href={link.href} className="flex items-center space-x-4 hover:text-purple-400 transition">

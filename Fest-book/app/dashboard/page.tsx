@@ -112,6 +112,7 @@ function DashboardHeader() {
          {/* Sidebar Links */}
                 <ul className="mt-6 px-8 space-y-6 text-lg">
                   {[
+                    { name: "Home", icon: <FiHome size={24} />, href: "/home" },
                     { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
                     { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
                     { name: "Bookings", icon: <FiBook size={24} />, href: "/dashboard/bookings" },
