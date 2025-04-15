@@ -129,29 +129,7 @@ function DashboardHeader() {
       </nav>
     </header>
 
-      {/* Event Registration Section */}
-      <h2 className="text-4xl font-bold text-center my-10">Event Registration</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
-        {/* Event Cards with Gradients */}
-        {[
-          { title: "Wedding Music Artists", img: "/wedding.jpg", desc: "Mela vaaithiyam, chenda melam for weddings." },
-          { title: "Photo & Video Shoot", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
-          { title: "Food Supply", img: "/Food Supply.jpg", desc: "Multi-cuisine catering services available." },
-          { title: "Invitation Cards", img: "/Invitation Cards.jpg", desc: "Design custom invitation cards." },
-          { title: "Stage Decorations", img: "/Stage Decorations.jpg", desc: "Stage decoration with floral & themes." },
-          { title: "Vehicle Arrangement", img: "/vehicle.jpg", desc: "Wedding car decoration & transport services." }
-        ].map((event, index) => (
-          <div key={index} className="relative overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300">
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80"></div>
-            <img src={event.img} alt={event.title} className="w-full h-48 object-cover rounded-xl" />
-            <div className="absolute bottom-0 p-4">
-              <h3 className="text-2xl font-semibold">{event.title}</h3>
-              <p className="text-white text-sm">{event.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
 
      
       {/* Registered Events */}

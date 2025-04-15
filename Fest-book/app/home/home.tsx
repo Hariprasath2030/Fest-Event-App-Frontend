@@ -18,6 +18,7 @@ export default function Home() {
           backgroundAttachment: "fixed"
         }}
       >
+        <div className="bg-primary text-white p-4 md:p-8 xs:text-sm lg:text-lg animate-fadeIn"></div>
         <div className="container mx-auto flex justify-between items-center py-4 px-6">
 
           {/* Mobile Menu Button */}
