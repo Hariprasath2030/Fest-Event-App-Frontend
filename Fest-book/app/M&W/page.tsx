@@ -85,24 +85,22 @@ export default function Events() {
         ))}
       </div>
 
-     
-
-      {/* Registered Events */}
-      <div>
-        <h2 className="text-4xl font-semibold text-center my-10"></h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {events.map((event) => (
-            <div key={event.id} className="relative overflow-hidden rounded-xl shadow-lg min-h-[250px] flex flex-col justify-end p-4 bg-cover bg-center" style={{ backgroundImage: `url(${event.image})` }}>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black"></div>
-              <div className="relative">
-                <h3 className="text-white text-xl font-bold">{event.title}</h3>
-                <p className="text-white text-sm">📅 {new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-white text-sm">📍 {event.location}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+{/* About & Contact Section */}
+<div className="mt-20 px-8">
+  {/* About */}
+  <section className="mb-16">
+  <div className="w-full max-w-6xl mx-auto">
+    <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
+    <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
+    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-6xl mx-auto">
+    Marriage is a culturally and legally recognized union between individuals that signifies a lifelong commitment, love, and mutual support. It serves as the foundation for building families and nurturing social bonds. While the concept of marriage exists across the globe, the customs, rituals, and beliefs surrounding it vary widely, influenced by tradition, religion, and societal values.
+    A wedding, on the other hand, is the ceremonial celebration of this union. It marks the formal beginning of married life and is often a grand occasion filled with meaningful rituals, vibrant traditions, and joyous gatherings. Weddings can be deeply personal or lavish public events, depending on cultural heritage and individual preferences. From engagement and pre-wedding festivities to the main ceremony and post-wedding celebrations, each step is imbued with symbolism and emotion.
+    Weddings bring people together, celebrating love, unity, and the coming together of two families. Whether it’s a traditional Hindu wedding, a Christian ceremony, a Muslim Nikah, or a civil registry wedding, the essence remains the same—celebrating a deep and enduring bond.
+    In today's evolving world, weddings continue to adapt, blending age-old traditions with modern innovations. From destination weddings and themed events to sustainable celebrations and digital invitations, the way we celebrate marriage continues to reflect changing times while honoring timeless values.
+</p>
+  </div>
+  </section>
+</div> 
     </div>
   );
 }

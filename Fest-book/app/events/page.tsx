@@ -66,9 +66,9 @@ export default function Events() {
   { title: "House Warming", img: "/house warming.jpg", desc: "Multi-cuisine catering services available.", link: "/H&W" },
   { title: "Birthday Party", img: "/birthday party.jpg", desc: "Multi-cuisine catering services available.", link: "/B&P" },
   { title: "Puberty Function", img: "/Puberty Function.png", desc: "Wedding car decoration & transport services.", link: "/P&F" },
-  { title: "Anniversaries", img: "/Anniversary.jpg", desc: "Make your special day memorable.", link: "/events/anniversaries" },
-  { title: "Engagements", img: "/Engagement.jpg", desc: "Celebrate your love with a grand engagement.", link: "/events/engagements" },
-  { title: "Baby Showers", img: "/Baby Shower.jpg", desc: "Celebrate the arrival of your little one.", link: "/events/baby-showers" },
+  { title: "Anniversaries", img: "/Anniversary.jpg", desc: "Make your special day memorable.", link: "/E&M" },
+  { title: "Engagements", img: "/Engagement.jpg", desc: "Celebrate your love with a grand engagement.", link: "/E&M" },
+  { title: "Baby Showers", img: "/Baby Shower.jpg", desc: "Celebrate the arrival of your little one.", link: "/B&S" },
   { title: "Graduation Parties", img: "/Graduation.jpg", desc: "Celebrate your academic achievements.", link: "/events/graduation-parties" },
   
 

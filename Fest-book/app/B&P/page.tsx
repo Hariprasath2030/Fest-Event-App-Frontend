@@ -85,24 +85,22 @@ export default function Events() {
         ))}
       </div>
 
-     
+     {/* About & Contact Section */}
+<div className="mt-20 px-8">
+  {/* About */}
+  <section className="mb-16">
+  <div className="w-full max-w-6xl mx-auto">
+    <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
+    <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
+    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-7xl mx-auto">
+    A birthday party is a joyous occasion celebrated to mark the anniversary of a person's birth. It is a time for friends and family to come together to celebrate life, express love, and make lasting memories. Birthday parties can vary in size and style, ranging from intimate gatherings with close friends and family to grand celebrations with elaborate themes and decorations. The common thread, however, is the focus on honoring the individual and making them feel special.
 
-      {/* Registered Events */}
-      <div>
-        <h2 className="text-4xl font-semibold text-center my-10">Upcoming Events</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {events.map((event) => (
-            <div key={event.id} className="relative overflow-hidden rounded-xl shadow-lg min-h-[250px] flex flex-col justify-end p-4 bg-cover bg-center" style={{ backgroundImage: `url(${event.image})` }}>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black"></div>
-              <div className="relative">
-                <h3 className="text-white text-xl font-bold">{event.title}</h3>
-                <p className="text-white text-sm">📅 {new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-white text-sm">📍 {event.location}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+Traditionally, birthday parties include various fun activities such as games, music, and dancing, depending on the age group and preferences of the person celebrating. For children, it might include bouncy castles, face painting, and party favors, while adults may enjoy dinner parties, themed events, or a night out. A key highlight of any birthday party is the cutting of the birthday cake, often accompanied by singing "Happy Birthday" and making a wish.
+
+Guests typically bring gifts, which can range from personal items to creative, unique presents that reflect the celebrant's interests. Whether it's a casual affair or an extravagant event, birthday parties are a time to celebrate the individual, reflect on the past year, and look forward to the year ahead with optimism and joy. It’s a day that brings people together, fostering love and connection through shared happiness.</p>
+  </div>
+  </section>
+</div> 
     </div>
   );
 }

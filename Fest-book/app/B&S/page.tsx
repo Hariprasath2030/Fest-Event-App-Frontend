@@ -26,7 +26,7 @@ export default function Events() {
         <button onClick={() => setIsOpen(true)}>
           <FaBars size={32} className="text-white hover:text-purple-400 transition" />
         </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">House Warming</h2>
+        <h2 className="text-4xl font-bold text-center mx-auto my-10">Marriage & Wedding</h2>
       </header>
 
       {/* Massive Sidebar */}
@@ -63,10 +63,14 @@ export default function Events() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {/* Event Cards with Gradients */}
         {[
+          
           { title: "Photography & Videography", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
+          { title: "DJ & Sound Systems", img: "/DJ & Sound.jpg", desc: "Professional DJ services for all events." },
+          {title: "Beautician",img: "/beautician.jpg",desc: "Bridal makeup, hairstyling & grooming services."},
           { title: "Floral Decorations", img: "/floral.jpg", desc: "Beautiful floral arrangements for your event." },
           { title: "Invitation Cards", img: "/Invitation Cards.jpg", desc: "Design custom invitation cards." },
           { title: "Food Supply", img: "/Food Supply.jpg", desc: "Multi-cuisine catering services available." },
+          { title: "Stage Decorations", img: "/Stage Decorations.jpg", desc: "Stage decoration with floral & themes." },
           { title: "Vehicle Arrangement", img: "/vehicle.jpg", desc: "Wedding car decoration & transport services." }
           
         ].map((event, index) => (
@@ -81,18 +85,7 @@ export default function Events() {
         ))}
       </div>
 
-     {/* About & Contact Section */}
-<div className="mt-20 px-8">
-  {/* About */}
-  <section className="mb-16">
-  <div className="w-full max-w-6xl mx-auto">
-    <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
-    <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
-    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-6xl mx-auto">
-    A housewarming is a joyful and meaningful celebration that marks the beginning of a new chapter in one’s life. It is traditionally held when individuals or families move into a new home, symbolizing the warmth, happiness, and positive energy they wish to bring into their space. The event is often shared with close family, friends, and neighbors, who come together to bless the new home, offer good wishes, and create cherished memories. In many cultures, housewarming ceremonies include religious or spiritual rituals to purify the space and invite prosperity, peace, and protection. Guests typically bring gifts that are both thoughtful and symbolic, contributing to the home's welcoming atmosphere. Whether simple or elaborate, a housewarming gathering is all about connection, gratitude, and celebration. It transforms a new house into a home filled with love, laughter, and blessings, making it a truly special and memorable occasion.</p>
-  </div>
-  </section>
-</div> 
+  
     </div>
   );
 }
