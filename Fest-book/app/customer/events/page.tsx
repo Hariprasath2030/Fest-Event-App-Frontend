@@ -26,7 +26,7 @@ export default function Events() {
         <button onClick={() => setIsOpen(true)}>
           <FaBars size={32} className="text-white hover:text-purple-400 transition" />
         </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">Event Registration</h2>
+        <h2 className="text-4xl font-bold text-center mx-auto my-10">All Types of Events</h2>
       </header>
 
       {/* Massive Sidebar */}
@@ -42,10 +42,10 @@ export default function Events() {
                 </button>
               </div>
         <ul className="mt-6 px-8 space-y-6 text-lg">
-          {[{ name: "Home", icon: <FiHome size={24} />, href: "home" },
-            { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
-            { name: "Bookings", icon: <FiBook size={24} />, href: "/bookings" },
-            { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
+          {[{ name: "Home", icon: <FiHome size={24} />, href: "/" },
+            { name: "Dashboard", icon: <FiHome size={24} />, href: "/customer/dashboard" },
+            { name: "Bookings", icon: <FiBook size={24} />, href: "/customer/dashboard/bookings" },
+            { name: "Settings", icon: <FiSettings size={24} />, href: "/custpmer/settings" },
           ].map((link) => (
             <li key={link.name}>
               <Link href={link.href} className="flex items-center space-x-4 hover:text-purple-400 transition">
@@ -58,18 +58,18 @@ export default function Events() {
       </nav>
 
 {/* Event Registration Section */}
-      <h2 className="text-4xl font-bold text-center my-10">All Types of Events</h2>
+      <h2 className="text-4xl font-bold text-center my-10"></h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {/* Event Cards with Gradients */}
         {[
-  { title: "Marriage & Wedding", img: "/wedding.jpg", desc: "Mela vaaithiyam, chenda melam for weddings.", link: "/M&W" },
-  { title: "House Warming", img: "/house warming.jpg", desc: "Multi-cuisine catering services available.", link: "/H&W" },
-  { title: "Birthday Party", img: "/birthday party.jpg", desc: "Multi-cuisine catering services available.", link: "/B&P" },
-  { title: "Puberty Function", img: "/Puberty Function.png", desc: "Wedding car decoration & transport services.", link: "/P&F" },
-  { title: "Anniversaries", img: "/Anniversary.jpg", desc: "Make your special day memorable.", link: "/E&M" },
-  { title: "Engagements", img: "/Engagement.jpg", desc: "Celebrate your love with a grand engagement.", link: "/E&M" },
-  { title: "Baby Showers", img: "/Baby Shower.jpg", desc: "Celebrate the arrival of your little one.", link: "/B&S" },
-  { title: "Graduation Parties", img: "/Graduation.jpg", desc: "Celebrate your academic achievements.", link: "/events/graduation-parties" },
+  { title: "Marriage & Wedding", img: "/wedding.jpg", desc: "Mela vaaithiyam, chenda melam for weddings.", link: "/customer/M&W" },
+  { title: "House Warming", img: "/house warming.jpg", desc: "Multi-cuisine catering services available.", link: "/customer/H&W" },
+  { title: "Birthday Party", img: "/birthday party.jpg", desc: "Multi-cuisine catering services available.", link: "/customer/B&P" },
+  { title: "Puberty Function", img: "/Puberty Function.png", desc: "Wedding car decoration & transport services.", link: "/customer/P&F" },
+  { title: "Anniversaries", img: "/Anniversary.jpg", desc: "Make your special day memorable.", link: "/customer/E&M" },
+  { title: "Engagements", img: "/Engagement.jpg", desc: "Celebrate your love with a grand engagement.", link: "/customer/E&M" },
+  { title: "Baby Showers", img: "/Baby Shower.jpg", desc: "Celebrate the arrival of your little one.", link: "/customer/B&S" },
+  { title: "Graduation Parties", img: "/Graduation.jpg", desc: "Celebrate your academic achievements.", link: "/customer/events/graduation-parties" },
   
 
   

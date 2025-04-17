@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaBars } from 'react-icons/fa';
-import { FiSettings, FiUser, FiLock, FiBell, FiSun, FiMoon, FiX, FiGlobe, FiCreditCard, FiActivity } from "react-icons/fi";
+import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings, FiLogOut, FiSun, FiMoon } from "react-icons/fi";
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Settings() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,34 +41,52 @@ export default function Settings() {
         <button onClick={() => setIsOpen(true)}>
           <FaBars size={32} className={`${isDarkMode ? "text-white" : "text-black"} hover:text-blue-400 transition`} />
         </button>
+        <h2 className="text-4xl font-bold text-center mx-auto my-10">Profile Settings</h2>
         <div className="flex items-center space-x-4">
           <span>{isDarkMode ? "Dark Mode" : "Light Mode"}</span>
         </div>
       </header>
 
       {/* Sidebar */}
-      <nav className={`fixed top-0 left-0 h-full w-[35vw] bg-gray-900 text-white z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out shadow-2xl`}>
-        <div className="flex justify-between items-center p-4">
-          <h1 className="text-2xl font-bold">Settings</h1>
-          <button onClick={() => setIsOpen(false)}>
-            <FiX size={24} />
-          </button>
-        </div>
-        <ul className="space-y-4 px-4">
-          {[{ name: "My Status", icon: <FiActivity size={24} /> },
-            { name: "Language", icon: <FiGlobe size={24} /> },
-            { name: "Account Details", icon: <FiUser size={24} /> },
-            { name: "Security & Login", icon: <FiLock size={24} /> },
-            { name: "Ads & Payment", icon: <FiCreditCard size={24} /> }
-          ].map((item) => (
-            <li key={item.name} className="flex items-center space-x-4 hover:text-blue-400 transition">
-              {item.icon}
-              <span>{item.name}</span>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
+           <nav
+             className={`fixed top-0 left-0 h-full w-[240px] bg-gray-900 text-white z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+               } transition-transform duration-300 ease-in-out shadow-2xl`}
+           >
+             <div className="flex justify-between items-center p-6 border-b border-gray-700">
+               <h1 className="text-3xl font-bold">FestBook</h1>
+               <button onClick={() => setIsOpen(false)}>
+                 <FiX size={28} className="text-white hover:text-red-500 transition" />
+               </button>
+             </div>
+     
+             {/* Sidebar Links */}
+             <ul className="mt-6 px-8 space-y-6 text-lg">
+               {[
+                 { name: "Dashboard", icon: <FiHome size={24} />, href: "/customer/dashboard" },
+                 { name: "Events", icon: <FiCalendar size={24} />, href: "/customer/events" },
+                 { name: "Bookings", icon: <FiBook size={24} />, href: "/customer/dashboard/bookings" },
+                 { name: "Profile", icon: <FiUser size={24} />, href: "/profile" },
+                 { name: "Settings", icon: <FiSettings size={24} />, href: "/customer/settings" },
+               ].map((link) => (
+                 <li key={link.name}>
+                   <Link href={link.href} className="flex items-center space-x-4 hover:text-blue-400 transition">
+                     {link.icon}
+                     <span>{link.name}</span>
+                   </Link>
+                 </li>
+               ))}
+             </ul>
+     
+             {/* Logout Button */}
+             <div className="absolute bottom-10 left-10">
+               <div className="ml-auto flex items-center gap-4">
+                 <div className="hover:bg-gray-800 transition rounded-lg px-4 py-2">
+                   <UserButton />
+                 </div>
+               </div>
+             </div>
+           </nav>
+     
       {/* Settings Form */}
       <div className="flex justify-center items-center mt-12 px-4">
         <div className="p-8 rounded-xl shadow-xl w-full max-w-3xl bg-opacity-10 bg-black/20">

@@ -1,29 +1,40 @@
-import { Oxanium } from "next/font/google";
-import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { ReactNode } from "react";
+// app/layout.tsx
+
+'use client'; // <-- This directive marks this as a Client Component
+
+import { Oxanium } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { ReactNode } from 'react';
+import { AuthProvider } from './organiser/contexts/AuthContext'; // Import the context
+import { BrowserRouter } from 'react-router-dom';
+import './globals.css';
 
 const oxanium = Oxanium({
-  subsets: ["latin"],
+  subsets: ['latin'],
 });
 
-export const metadata = {
-  title: "Fest-Book App",
-  description: "Event management app!",
+const metadata = {
+  title: 'Fest-Book App',
+  description: 'Event management app!',
 };
 
 interface RootLayoutProps {
-  children: ReactNode;  // Explicitly type children as ReactNode
+  children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={oxanium.className}>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <head />
+      <body className={oxanium.className}>
+        {/* Wrapping children in necessary providers */}
+        <ClerkProvider>
+          <AuthProvider>
+            {/* BrowserRouter should wrap the whole layout */}
+            <BrowserRouter>{children}</BrowserRouter>
+          </AuthProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

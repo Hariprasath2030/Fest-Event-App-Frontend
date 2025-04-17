@@ -1,6 +1,6 @@
 import { SignUp } from "@clerk/nextjs";
 import Image from 'next/image';
-import img from "../../../../public/signin.jpg";
+import img from "../../../../../public/signin.jpg";
 import Link from "next/link";
 export default function Page() {
   return (
@@ -30,7 +30,7 @@ export default function Page() {
 
           <div className="mt-8 flex flex-wrap gap-4 text-center">
             <Link
-              href="/sign-in"
+              href="/customer/sign-in"
               className="block w-full rounded-sm bg-rose-600 px-40 py-3 text-sm font-medium text-white shadow-sm hover:bg-rose-700 focus:ring-3 focus:outline-hidden sm:w-auto"
             >
               Login with Expense Tracker

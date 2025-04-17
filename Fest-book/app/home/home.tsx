@@ -9,77 +9,77 @@ export default function Home() {
   const { isSignedIn } = useUser();
   return (
     <div>
-      {/* Navbar with Background Image */}
-      <nav className="fixed w-full z-50 bg-cover bg-center bg-no-repeat "
-        style={{
-          backgroundImage: "url('/home.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed"
-        }}
-      >
-        <div className="bg-primary text-white p-4 md:p-8 xs:text-sm lg:text-lg animate-fadeIn"></div>
-        <div className="container mx-auto flex justify-between items-center py-4 px-6">
+    <nav
+      className="fixed top-0 left-0 w-full z-50 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/home.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      <div className="bg-primary text-white p-4 md:p-8"></div>
 
-          {/* Mobile Menu Button */}
-          <button
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        {/* Logo (optional) */}
+        <div className="text-white text-xl font-bold"></div>
 
-            className="md:hidden text-white focus:outline-none text-2xl"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-
-          {/* Desktop Menu - Centered */}
-          <div className="hidden md:flex justify-center items-center w-full">
-            <ul className="flex space-x-6">
-              <li>
-                <Link href="#about" className="flex items-center gap-2 text-white hover:text-white-300">
-                  <FaUser /> About
-                </Link>
-              </li>
-              <li>
-                <Link href="#event-management" className="flex items-center gap-2 text-white hover:text-white-300">
-                  <FaCalendarAlt /> Events
-                </Link>
-              </li>
-              <li>
-                <Link href="#contact" className="flex items-center gap-2 text-white hover:text-white-300">
-                  <FaEnvelope /> Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Login/User Button */}
-          <div className="flex items-center space-x-4">
-            {isSignedIn ? (
-              <UserButton />
-            ) : (
-              <Link href="/sign-in">
-              </Link>
-            )}
-          </div>
-        </div>
-
-        {/* Mobile Dropdown Menu - Centered */}
-        {menuOpen && (
-          <div className="md:hidden bg-opacity-80 p-4 text-center w-full">
-            <Link href="#about" className="text-white hover:text-white-300 py-2 flex items-center justify-center gap-2">
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-8 text-white font-medium">
+          <li>
+            <Link href="#about" className="flex items-center gap-2 hover:text-gray-300">
               <FaUser /> About
             </Link>
-            <Link href="#event-management" className=" text-white hover:text-white-300 py-2 flex items-center justify-center gap-2">
+          </li>
+          <li>
+            <Link href="#event-management" className="flex items-center gap-2 hover:text-gray-300">
               <FaCalendarAlt /> Events
             </Link>
-            <Link href="#contact" className=" text-white hover:text-white-300 py-2 flex items-center justify-center gap-2">
+          </li>
+          <li>
+            <Link href="#contact" className="flex items-center gap-2 hover:text-gray-300">
               <FaEnvelope /> Contact
             </Link>
-          </div>
-        )}
-      </nav>
-      {/* Hero Section with Full-Page Background */}
+          </li>
+        </ul>
+
+        {/* User Button / Login */}
+        <div className="text-white">
+
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-white text-2xl focus:outline-none"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-black bg-opacity-70 px-6 py-4 text-white text-center space-y-4">
+          <Link href="#about" className="flex items-center justify-center gap-2 hover:text-gray-300">
+            <FaUser /> About
+          </Link>
+          <Link href="#event-management" className="flex items-center justify-center gap-2 hover:text-gray-300">
+            <FaCalendarAlt /> Events
+          </Link>
+          <Link href="#contact" className="flex items-center justify-center gap-2 hover:text-gray-300">
+            <FaEnvelope /> Contact
+          </Link>
+          {!isSignedIn && (
+            <Link href="/customer/sign-in" className="block text-white hover:underline">
+              Sign In
+            </Link>
+          )}
+        </div>
+      )}
+    </nav>
+       {/* Hero Section with Full-Page Background */}
       <section
-        className="flex flex-col justify-center items-center text-center min-h-screen text-white px-4"
+        className="flex flex-col justify-center items-center text-center min-h-screen text-white px-10 w-screen"
         style={{
           backgroundImage: "url('/home.jpg')", // Use WebP for better quality
           backgroundSize: "cover",
@@ -121,8 +121,8 @@ export default function Home() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             {[
-              { href: "/sign-in", text: "Customer Login", bg: "bg-indigo-500", hover: "hover:bg-indigo-600" },
-              { href: "/sign-in-organizer", text: "Organizer Login", bg: "bg-teal-500", hover: "hover:bg-teal-600" },
+              { href: "/customer/sign-in", text: "Customer Login", bg: "bg-indigo-500", hover: "hover:bg-indigo-600" },
+              { href: "/organiser/login", text: "Organizer Login", bg: "bg-teal-500", hover: "hover:bg-teal-600" },
             ].map((btn, index) => (
               <a
                 key={index}

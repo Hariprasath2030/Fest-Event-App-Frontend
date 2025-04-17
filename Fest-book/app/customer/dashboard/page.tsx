@@ -1,4 +1,4 @@
-'use client';  
+'use client';
 
 import { useState, useEffect } from 'react';
 import { FaBars } from 'react-icons/fa'; // Import X icon from react-icons
@@ -67,72 +67,70 @@ function DashboardHeader() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white">
 
-<header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
-      {/* Sidebar Button */}
-      <div className="flex items-center">
-        <button onClick={() => setIsOpen(true)} >
-          <FaBars size={32} className="text-white hover:text-blue-400 transition" />
-        </button>
-      </div>
-
-      {/* Title */}
-      <h1 className="ml-4 text-4xl font-extrabold tracking-wide hover:text-blue-400 transition duration-300 cursor-pointer">
-        Event Management
-      </h1>
-
-      {/* User Button */}
-      <div className="ml-auto flex items-center gap-4">
-        <div className="hover:bg-gray-800 transition rounded-lg px-4 py-2">
-          <UserButton />
+      <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
+        {/* Sidebar Button */}
+        <div className="flex items-center">
+          <button onClick={() => setIsOpen(true)} >
+            <FaBars size={32} className="text-white hover:text-blue-400 transition" />
+          </button>
         </div>
-      </div>
+
+        {/* Title */}
+        <h1 className="ml-4 text-4xl font-extrabold tracking-wide hover:text-blue-400 transition duration-300 cursor-pointer">
+          Event Management
+        </h1>
+
+        {/* User Button */}
+        <div className="ml-auto flex items-center gap-4">
+          <div className="hover:bg-gray-800 transition rounded-lg px-4 py-2">
+            <UserButton />
+          </div>
+        </div>
 
 
-      {/* Sidebar Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40"
-          onClick={() => setIsOpen(false)}
-        ></div>
-      )}
+        {/* Sidebar Overlay */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setIsOpen(false)}
+          ></div>
+        )}
 
-      {/* Sidebar */}
-      <nav
-        className={`fixed top-0 left-0 h-full w-64 bg-gray-900 shadow-lg transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-50`}
-      >
-            <div className="flex justify-between items-center p-6 border-b border-gray-700">
-                <h1 className="text-3xl font-bold">FestBook</h1>
-                <button onClick={() => setIsOpen(false)}>
-                  <FiX size={28} className="text-white hover:text-red-500 transition" />
-                </button>
-              </div>
+        {/* Sidebar */}
+        <nav
+          className={`fixed top-0 left-0 h-full w-64 bg-gray-900 shadow-lg transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+            } transition-transform duration-300 ease-in-out z-50`}
+        >
+          <div className="flex justify-between items-center p-6 border-b border-gray-700">
+            <h1 className="text-3xl font-bold">FestBook</h1>
+            <button onClick={() => setIsOpen(false)}>
+              <FiX size={28} className="text-white hover:text-red-500 transition" />
+            </button>
+          </div>
 
-         {/* Sidebar Links */}
-                <ul className="mt-6 px-8 space-y-6 text-lg">
-                  {[
-                    { name: "Home", icon: <FiHome size={24} />, href: "/home" },
-                    { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
-                    { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
-                    { name: "Bookings", icon: <FiBook size={24} />, href: "/dashboard/bookings" },
-                    { name: "Profile", icon: <FiUser size={24} />, href: "/profile" },
-                    { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
-                  ].map((link) => (
-                    <li key={link.name}>
-                      <Link href={link.href} className="flex items-center space-x-4 hover:text-blue-400 transition">
-                        {link.icon}
-                        <span>{link.name}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-      </nav>
-    </header>
+          {/* Sidebar Links */}
+          <ul className="mt-6 px-8 space-y-6 text-lg">
+            {[
+              { name: "Dashboard", icon: <FiHome size={24} />, href: "/customer/dashboard" },
+              { name: "Events", icon: <FiCalendar size={24} />, href: "/customer/events" },
+              { name: "Bookings", icon: <FiBook size={24} />, href: "/customer/dashboard/bookings" },
+              { name: "Profile", icon: <FiUser size={24} />, href: "/profile" },
+              { name: "Settings", icon: <FiSettings size={24} />, href: "/customer/settings" },
+            ].map((link) => (
+              <li key={link.name}>
+                <Link href={link.href} className="flex items-center space-x-4 hover:text-blue-400 transition">
+                  {link.icon}
+                  <span>{link.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
 
-      
 
-     
+
+
       {/* Registered Events */}
       <h2 className="text-4xl font-semibold text-center my-10">Registered Events</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
@@ -148,7 +146,7 @@ function DashboardHeader() {
           </div>
         ))}
       </div>
-      
+
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 import Image from 'next/image';
-import img from "../../../../public/signin.jpg";
+import img from "../../../../../public/signin.jpg";
 import Link from "next/link";
 
 export default function Page() {

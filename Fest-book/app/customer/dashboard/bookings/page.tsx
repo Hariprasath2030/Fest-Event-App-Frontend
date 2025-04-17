@@ -40,7 +40,7 @@ export default function Bookings() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch("http://localhost:5000/api/events", {
         method: "POST",
@@ -49,23 +49,23 @@ export default function Bookings() {
         },
         body: JSON.stringify(eventDetails),
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to register event");
       }
-  
+
       const newEvent = await response.json();
-  
+
       setEvents([...events, newEvent]); // Update the UI with the new event
       setEventDetails({ name: "", email: "", eventName: "", eventDate: "", eventImage: "" });
-  
+
       alert("Registered successfully!");
     } catch (error) {
       console.error("Error registering event:", error);
       alert("Error registering event");
     }
   };
-  
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white">
@@ -81,7 +81,7 @@ export default function Bookings() {
         <button onClick={() => setIsOpen(true)}>
           <FaBars size={36} className="text-white hover:text-blue-400 transition" />
         </button>
-        <h1 className="text-2xl font-bold">Bookings</h1>
+        <h2 className="text-4xl font-bold text-center mx-auto my-10">Events Bookings</h2>
       </header>
 
       {/* Sidebar */}
@@ -99,11 +99,11 @@ export default function Bookings() {
         {/* Sidebar Links */}
         <ul className="mt-6 px-8 space-y-6 text-lg">
           {[
-            { name: "Dashboard", icon: <FiHome size={24} />, href: "/dashboard" },
-            { name: "Events", icon: <FiCalendar size={24} />, href: "/events" },
-            { name: "Bookings", icon: <FiBook size={24} />, href: "/dashboard/bookings" },
+            { name: "Dashboard", icon: <FiHome size={24} />, href: "/customer/dashboard" },
+            { name: "Events", icon: <FiCalendar size={24} />, href: "/customer/events" },
+            { name: "Bookings", icon: <FiBook size={24} />, href: "/customer/dashboard/bookings" },
             { name: "Profile", icon: <FiUser size={24} />, href: "/profile" },
-            { name: "Settings", icon: <FiSettings size={24} />, href: "/settings" },
+            { name: "Settings", icon: <FiSettings size={24} />, href: "/customer/settings" },
           ].map((link) => (
             <li key={link.name}>
               <Link href={link.href} className="flex items-center space-x-4 hover:text-blue-400 transition">
