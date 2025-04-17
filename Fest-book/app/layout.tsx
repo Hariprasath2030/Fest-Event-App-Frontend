@@ -22,16 +22,16 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <head />
-      <body className={oxanium.className}>
-        {/* Wrapping children in necessary providers */}
-        <ClerkProvider>
+    <ClerkProvider>
+      <html lang="en">
+        <head />
+        <body className={oxanium.className}>
+          {/* Wrapping children in necessary providers */}
           <AuthProvider>
             {children}
           </AuthProvider>
-        </ClerkProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
