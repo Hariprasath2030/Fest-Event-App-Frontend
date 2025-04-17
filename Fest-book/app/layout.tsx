@@ -30,9 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body className={oxanium.className}>
           {/* Wrapping children in necessary providers */}
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+        {children}
         </body>
       </html>
     </ClerkProvider>
