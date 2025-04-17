@@ -1,14 +1,14 @@
 "use client"
 import { useState } from 'react';
 import { message } from 'antd';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { useAuth } from '../contexts/AuthContext'; // Import useNavigate for redirection
+import { useRouter } from "next/navigation";
 
 const useLogin = () => {
   const { login } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const router = useRouter();// Initialize useNavigate
 
   const LoginUser = async (values) => {
     try {
@@ -24,21 +24,14 @@ const useLogin = () => {
 
       const data = await res.json();
 
-      if (res.status === 200) { // Check for 200 OK status
-        message.success(data.message || 'Login successful');
-        login(data.token, data.user);  // Adjusted for backend response
-
-        // After successful login, navigate to the dashboard or home page
-        navigate('/organiser/dashboard'); // Replace '/dashboard' with your desired page
+      if (res.status === 200) {
+        login(data.token, data.user);
+        router.push("/organiser/dashboard"); // ✅ REDIRECT to dashboard
       } else {
-        setError(data.message || 'Login failed');
-        message.error(data.message || 'Login failed');
+        alert(data.message || "Login failed");
       }
-    } catch (error) {
-      setError('Network error: Unable to log in');
-      message.error('Network error: Unable to log in');
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      alert("Network error");
     }
   };
 

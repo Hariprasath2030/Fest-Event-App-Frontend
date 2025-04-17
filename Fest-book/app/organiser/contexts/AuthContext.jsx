@@ -1,5 +1,5 @@
-"use client"
-import React, { createContext, useContext, useEffect, useState } from 'react';
+"use client";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -11,36 +11,41 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         try {
-            const storedData = JSON.parse(localStorage.getItem('user_data'));
-            if (storedData && storedData.userToken && storedData.user) {
+            const storedData = JSON.parse(localStorage.getItem("user_data"));
+            if (storedData?.userToken && storedData?.user) {
                 setToken(storedData.userToken);
                 setUserData(storedData.user);
                 setIsAuthenticated(true);
             }
         } catch (error) {
-            console.error("Failed to parse user data from localStorage", error);
+            console.error("Failed to parse user data", error);
         } finally {
-            setLoading(false); // Loading complete
+            setLoading(false);
         }
     }, []);
 
-    const login = (newToken, newData) => {
-        localStorage.setItem('user_data', JSON.stringify({ userToken: newToken, user: newData }));
+    const login = (newToken, newUser) => {
+        localStorage.setItem(
+            "user_data",
+            JSON.stringify({ userToken: newToken, user: newUser })
+        );
         setToken(newToken);
-        setUserData(newData);
+        setUserData(newUser);
         setIsAuthenticated(true);
     };
 
     const logout = () => {
-        localStorage.removeItem('user_data');
+        localStorage.removeItem("user_data");
         setToken(null);
         setUserData(null);
         setIsAuthenticated(false);
     };
 
     return (
-        <AuthContext.Provider value={{ token, userData, isAuthenticated, loading, login, logout }}>
-            {!loading && children} {/* Render children only when loading is false */}
+        <AuthContext.Provider
+            value={{ token, userData, isAuthenticated, loading, login, logout }}
+        >
+            {!loading && children}
         </AuthContext.Provider>
     );
 };

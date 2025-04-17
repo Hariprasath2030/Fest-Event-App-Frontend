@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../app/home/home';
 import Register from './organiser/(auth)/register/page';
@@ -11,12 +11,28 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={isAuthenticated ? <Navigate to="/" /> : <Home />} />
-      <Route path="/customer/sign-in" element={<Navigate to='/' />} />
+      <Route path="/" element={<Home />} />
 
-      <Route path="/organiser/register" element={isAuthenticated ? <Navigate to="/organiser/dashboard" /> : <Register />} />
-      <Route path="/organiser/login" element={isAuthenticated ? <Navigate to="/organiser/dashboard" /> : <Login />} />
-      <Route path="/organiser/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/organiser/login" />} />
+      {/* Customer Routes */}
+      <Route path="/customer/dashboard" element={<Navigate to="/" />} />
+      <Route path="/customer/sign-in" element={<Navigate to="/" />} />
+
+      {/* Organiser Auth Routes */}
+      <Route
+        path="/organiser/register"
+        element={!isAuthenticated ? <Register /> : <Navigate to="/organiser/dashboard" />}
+      />
+      <Route
+        path="/organiser/login"
+        element={!isAuthenticated ? <Login /> : <Navigate to="/organiser/dashboard" />}
+      />
+      <Route path="/organiser/register" element={<Navigate to="/" />} />
+      <Route path="/organiser/login" element={<Navigate to="/" />} />
+      {/* Organiser Dashboard */}
+      <Route
+        path="/organiser/dashboard"
+        element={isAuthenticated ? <Dashboard /> : <Navigate to="/organiser/login" />}
+      />
     </Routes>
   );
 };

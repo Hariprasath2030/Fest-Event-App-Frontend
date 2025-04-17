@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { message } from 'antd';
 import { useAuth } from '../contexts/AuthContext';
+import { useRouter } from "next/navigation";
 
 const useSignup = () => {
   const { login } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const registerUser = async (values) => {
     if (values.password !== values.passwordConfirm) {  // Updated field name to `passwordConfirm`
@@ -28,18 +30,14 @@ const useSignup = () => {
 
       const data = await res.json();
 
-      if (res.status === 201) {
-        message.success(data.message);
-        login(data.token, data.user);  // Adjust for backend response structure
+      if (res.status === 200) {
+        login(data.token, data.user);
+        router.push("/organiser/login"); // ✅ REDIRECT to dashboard
       } else {
-        setError(data.message || 'Registration failed');
-        message.error(data.message || 'Registration failed');
+        alert(data.message || "Login failed");
       }
-    } catch (error) {
-      setError('Network error: Unable to register');
-      message.error('Network error: Unable to register');
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      alert("Network error");
     }
   };
 
