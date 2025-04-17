@@ -8,7 +8,7 @@ const oxanium = Oxanium({
   subsets: ['latin'],
 });
 
-const metadata = {
+export const metadata = {
   title: 'Fest-Book App',
   description: 'Event management app!',
 };
