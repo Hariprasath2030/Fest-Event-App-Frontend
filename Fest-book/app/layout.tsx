@@ -4,7 +4,7 @@ import { Oxanium } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ReactNode } from 'react';
 import { AuthProvider } from './organiser/contexts/AuthContext'; // Import the context
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import './globals.css';
 
 const oxanium = Oxanium({
@@ -28,8 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {/* Wrapping children in necessary providers */}
         <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
           <AuthProvider>
-            {/* BrowserRouter should wrap the whole layout */}
-            <BrowserRouter>{children}</BrowserRouter>
+            {children}
           </AuthProvider>
         </ClerkProvider>
       </body>

@@ -1,11 +1,12 @@
 "use client";
 import { CircleX } from "lucide-react";
-import { Card, Typography, Form, Input, Button, Spin, Alert } from 'antd';
+import { Card, Form, Input, Button, Spin, Alert } from 'antd';
 import Link from "next/link";
 import loginImage from "../../../../public/signin.jpg";
 import Image from 'next/image';
 import useLogin from '../../hooks/useLogin'; // Correct hook import
 import '../form.css';
+import { Typography } from 'antd';
 
 const Login = () => {
   const { loading, error, LoginUser } = useLogin(); // Call hook as a function
@@ -37,8 +38,8 @@ const Login = () => {
             />
           </div>
           <div style={{ flex: 1 }}>
-            <Typography.Title level={3} strong className='title'>
-              Organiser  Sign In
+            <Typography.Title level={3} className='title'>
+              Organiser Sign In
             </Typography.Title>
             <Typography.Text type="secondary" strong className="slogan">
               Log in to your Account
