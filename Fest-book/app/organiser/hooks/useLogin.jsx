@@ -26,6 +26,7 @@ const useLogin = () => {
 
       if (res.status === 200) {
         login(data.token, data.user);
+        alert("Organiser Logged in Successfully")
         router.push("/organiser/dashboard"); // ✅ REDIRECT to dashboard
       } else {
         alert(data.message || "Login failed");

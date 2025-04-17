@@ -32,7 +32,8 @@ const useSignup = () => {
 
       if (res.status === 200) {
         login(data.token, data.user);
-        router.push("/organiser/login"); // ✅ REDIRECT to dashboard
+        router.push("/organiser/login"); 
+        alert("Organiser Registered Successfully")// ✅ REDIRECT to dashboard
       } else {
         alert(data.message || "Login failed");
       }
