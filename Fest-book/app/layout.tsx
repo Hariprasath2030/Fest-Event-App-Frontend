@@ -8,7 +8,7 @@ const oxanium = Oxanium({
   subsets: ['latin'],
 });
 
-const clerkPublishableKey = "pk_test_Y2FzdWFsLXN1bmJlYW0tOTMuY2xlcmsuYWNjb3VudHMuZGV2JA";
+const clerkPublishableKey = "pk_test_cmVhZHktd2FzcC0yNi5jbGVyay5hY2NvdW50cy5kZXYk";
 
 if (!clerkPublishableKey) {
   throw new Error('Add your Clerk Publishable Key to the .env file')
@@ -30,7 +30,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body className={oxanium.className}>
           {/* Wrapping children in necessary providers */}
-        {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </body>
       </html>
     </ClerkProvider>
