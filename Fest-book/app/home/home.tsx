@@ -18,8 +18,6 @@ export default function Home() {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="bg-primary text-white p-4 md:p-8"></div>
-
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo (optional) */}
         <div className="text-white text-xl font-bold"></div>
@@ -70,8 +68,8 @@ export default function Home() {
             <FaEnvelope /> Contact
           </Link>
           {!isSignedIn && (
-            <Link href="/customer/sign-in" className="block text-white hover:underline">
-              Sign In
+            <Link href="/customer/sign-in" className="block text-white text-bold hover:underline">
+              Login 
             </Link>
           )}
         </div>
@@ -121,13 +119,13 @@ export default function Home() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             {[
-              { href: "/customer/sign-in", text: "Customer Login", bg: "bg-indigo-500", hover: "hover:bg-indigo-600" },
+              { href: "/customer/sign-in", text: "Customer Login", bg: "bg-yellow-300", hover: "hover:bg-yellow-200" },
               { href: "/organiser/login", text: "Organizer Login", bg: "bg-teal-500", hover: "hover:bg-teal-600" },
             ].map((btn, index) => (
               <a
                 key={index}
                 href={btn.href}
-                className={`inline-block rounded-full ${btn.bg} px-8 py-3 text-lg font-medium text-white transition duration-300 transform shadow-lg ${btn.hover} hover:scale-105 hover:shadow-2xl`}
+                className={`inline-block rounded-full ${btn.bg} px-8 py-3 text-lg font-medium text-black transition duration-300 transform shadow-lg ${btn.hover} hover:scale-105 hover:shadow-2xl`}
               >
                 {btn.text}
               </a>

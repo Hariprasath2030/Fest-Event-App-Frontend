@@ -1,34 +1,36 @@
 "use client";
 import { CircleX } from "lucide-react";
-import { Card, Form, Input, Button, Spin, Alert } from 'antd';
+import { Card, Form, Input, Button, Spin, Alert, Typography } from 'antd';
 import Link from "next/link";
 import loginImage from "../../../../public/signin.jpg";
 import Image from 'next/image';
-import useLogin from '../../hooks/useLogin'; // Correct hook import
+import useLogin from '../../hooks/useLogin'; 
 import '../form.css';
-import { Typography } from 'antd';
 
 const Login = () => {
-  const { loading, error, LoginUser } = useLogin(); // Call hook as a function
+  const { loading, error, LoginUser } = useLogin();
+
   const handleLogin = async (values: any) => {
     await LoginUser(values);
-  }
+  };
 
   return (
     <>
-      {/* Navbar Component */}
       <div className="background-image"></div>
-      <Card className='form-container'>
-        <div className="w-full flex justify-end align-top">
-          <Link href={"/"}>
+      <Card className="form-container">
+        {/* Close Button */}
+        <div className="flex justify-end">
+          <Link href="/">
             <button>
-              <CircleX className="bg-red-600 rounded-full text-white" />
+              <CircleX className="bg-red-600 rounded-full text-white hover:bg-red-700 p-1 transition" />
             </button>
           </Link>
         </div>
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <div style={{ flex: 1 }}>
-            {/* <img src={loginImage} alt="Login" className='auth-image' /> */}
+
+        {/* Content Section */}
+        <div className="flex flex-col md:flex-row gap-5 items-center">
+          {/* Left - Image */}
+          <div className="w-full md:w-1/2">
             <Image
               src={loginImage}
               alt="Login"
@@ -37,15 +39,17 @@ const Login = () => {
               className="auth-image"
             />
           </div>
-          <div style={{ flex: 1 }}>
-            <Typography.Title level={3} className='title'>
+
+          {/* Right - Form */}
+          <div className="w-full md:w-1/2">
+            <Typography.Title level={3} className="title">
               Organiser Sign In
             </Typography.Title>
             <Typography.Text type="secondary" strong className="slogan">
               Log in to your Account
             </Typography.Text>
-            <Form layout="vertical" onFinish={handleLogin} autoComplete='off'>
 
+            <Form layout="vertical" onFinish={handleLogin} autoComplete="off">
               <Form.Item
                 label="Email"
                 name="email"
@@ -71,7 +75,7 @@ const Login = () => {
                   type="error"
                   showIcon
                   closable
-                  className='alert'
+                  className="alert"
                 />
               )}
 
@@ -80,7 +84,7 @@ const Login = () => {
                   type="primary"
                   htmlType="submit"
                   size="large"
-                  className='btn'
+                  className="btn"
                   disabled={loading}
                 >
                   {loading ? <Spin /> : 'Sign In'}
@@ -89,7 +93,7 @@ const Login = () => {
 
               <Form.Item>
                 <Link href="/organiser/register">
-                  <Button size="large" className='btn'>
+                  <Button size="large" className="btn">
                     Create an Account
                   </Button>
                 </Link>
@@ -100,6 +104,6 @@ const Login = () => {
       </Card>
     </>
   );
-}
+};
 
 export default Login;

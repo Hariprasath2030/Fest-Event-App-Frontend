@@ -5,43 +5,40 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <section className="relative h-screen">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-800 via-pink-600 to-yellow-500">
+      {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
           src={img}
-          alt="Fest Book"
-          className="absolute inset-0 w-full h-full object-cover"
+          alt="Festive Vibes"
+          className="w-full h-full object-cover"
           quality={100}
-          layout="fill"
+          priority
         />
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       </div>
 
-      <div className="absolute inset-0 bg-gray-900/75 sm:bg-transparent sm:from-gray-900/95 sm:to-gray-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
-
-      <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
-        <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-          <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
-            Experience the Ultimate
-            <strong className="block font-extrabold text-rose-500"> Festival Guide. </strong>
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl px-6 py-12">
+        {/* Left: Text Content */}
+        <div className="text-white max-w-xl text-center lg:text-left space-y-6">
+          <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
+            Reconnect with the <span className="text-yellow-400">Festival Spirit</span>
           </h1>
-
-          <p className="mt-4 max-w-lg text-white sm:text-xl/relaxed">
-            Discover, book, and enjoy the best festivals around you. Stay updated with event schedules, artists, and exclusive offers with Fest Book!
+          <p className="text-lg sm:text-xl text-gray-200">
+            Sign in to access your personalized festival dashboard. Keep track of your favorite events, friends, and ticket info all in one place.
           </p>
-
-          <div className="mt-8 flex flex-wrap gap-4 text-center">
-            <Link
-              href="/"
-              className="block w-full rounded-sm bg-rose-600 px-40 py-3 text-sm font-medium text-white shadow-sm hover:bg-rose-700 focus:ring-3 focus:outline-hidden sm:w-auto"
-            >
-              Explore Fest Book
-            </Link>
-          </div>
+          <Link
+            href="/"
+            className="inline-block bg-yellow-400 text-black px-6 py-3 font-semibold rounded-md shadow-lg hover:bg-yellow-200 transition-all"
+          >
+            Explore Fest Book
+          </Link>
         </div>
 
-        <div className="mt-12 ltr:ml-auto rtl:mr-auto">
-          {/* Update the afterSignInUrl to be absolute */}
-          <SignIn routing="hash" />
+        {/* Right: Sign In Card */}
+        <div className="mt-10 lg:mt-0 lg:ml-10 bg-white rounded-xl shadow-xl p-0 sm:p-8 w-full max-w-md">
+          <SignIn routing="hash" appearance={{ elements: { formButtonPrimary: "bg-purple-600 hover:bg-purple-700 text-white" } }} />
         </div>
       </div>
     </section>
