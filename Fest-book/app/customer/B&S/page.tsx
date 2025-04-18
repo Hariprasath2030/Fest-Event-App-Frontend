@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import { FaBars } from 'react-icons/fa';
+import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Events() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [events, setEvents] = useState<{ id: string; title: string; date: string; location: string; image: string; }[]>([]);
   const [eventDetails, setEventDetails] = useState({ title: "", date: "", location: "", image: "" });
@@ -22,12 +24,20 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-900 via-black to-gray-900 p-5 text-white">
       {/* Header */}
-      <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
-        <button onClick={() => setIsOpen(true)}>
-          <FaBars size={32} className="text-white hover:text-purple-400 transition" />
-        </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">Marriage & Wedding</h2>
-      </header>
+     <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
+       {/* Left: Hamburger Menu */}
+       <button onClick={() => setIsOpen(true)}>
+         <FaBars size={32} className="text-white hover:text-purple-400 transition" />
+       </button>
+     
+       {/* Center: Title */}
+       <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Baby Showers</h2>
+     
+       {/* Right: Back Button */}
+       <button onClick={() => router.back()}>
+         <FaArrowLeft size={28} className="text-white hover:text-purple-400 transition" />
+       </button>
+     </header>
 
       {/* Massive Sidebar */}
       <nav
@@ -63,7 +73,7 @@ export default function Events() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {/* Event Cards with Gradients */}
         {[
-          
+           {title: "Balloon Decoration",img: "/Balloon Decoration.jpg",desc: "Creative balloon setups for parties & events.",link: "/services/balloon-decoration"},
           { title: "Photography & Videography", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
           { title: "DJ & Sound Systems", img: "/DJ & Sound.jpg", desc: "Professional DJ services for all events." },
           {title: "Beautician",img: "/beautician.jpg",desc: "Bridal makeup, hairstyling & grooming services."},
@@ -84,7 +94,23 @@ export default function Events() {
           </div>
         ))}
       </div>
+    
+      {/* About & Contact Section */}
+<div className="mt-20 px-8">
+  {/* About */}
+  <section className="mb-16">
+  <div className="w-full max-w-6xl mx-auto">
+    <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
+    <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
+    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-6xl mx-auto">
+    A baby shower is a heartwarming celebration held in anticipation of a new life entering the world. It is a joyous occasion where family and friends come together to honor and support the expectant parents, especially the mother-to-be, as they prepare for the arrival of their baby. Traditionally, baby showers involve giving thoughtful gifts that help the parents with baby essentials such as clothes, diapers, toys, and nursery items. These gestures symbolize care, love, and the shared excitement of welcoming a new member into the family.
 
+The event often includes fun games, themed decorations, delicious food, and heartfelt moments, creating lasting memories for everyone involved. In some cultures, baby showers also incorporate blessings, prayers, or rituals to ensure a healthy and safe delivery. While the format and traditions may vary, the core purpose remains the same — to celebrate the upcoming birth and offer emotional and practical support to the parents.
+
+Baby showers not only strengthen bonds among loved ones but also provide reassurance and encouragement to first-time parents. It’s a beautiful way to surround the growing family with love, positivity, and good wishes, making it a cherished milestone on the journey to parenthood.</p>
+  </div>
+  </section>
+</div> 
   
     </div>
   );

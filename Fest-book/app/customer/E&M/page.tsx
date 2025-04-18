@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import { FaBars } from 'react-icons/fa';
+import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Events() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [events, setEvents] = useState<{ id: string; title: string; date: string; location: string; image: string; }[]>([]);
   const [eventDetails, setEventDetails] = useState({ title: "", date: "", location: "", image: "" });
@@ -23,11 +25,20 @@ export default function Events() {
     <div className="min-h-screen bg-gradient-to-r from-purple-900 via-black to-gray-900 p-5 text-white">
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
-        <button onClick={() => setIsOpen(true)}>
-          <FaBars size={32} className="text-white hover:text-purple-400 transition" />
-        </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">Engagements</h2>
-      </header>
+  {/* Left: Hamburger Menu */}
+  <button onClick={() => setIsOpen(true)}>
+    <FaBars size={32} className="text-white hover:text-purple-400 transition" />
+  </button>
+
+  {/* Center: Title */}
+  <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Engagements</h2>
+
+  {/* Right: Back Button */}
+  <button onClick={() => router.back()}>
+    <FaArrowLeft size={28} className="text-white hover:text-purple-400 transition" />
+  </button>
+</header>
+
 
       {/* Massive Sidebar */}
       <nav

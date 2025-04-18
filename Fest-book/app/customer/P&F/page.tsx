@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import { FaBars } from 'react-icons/fa';
+import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Events() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [events, setEvents] = useState<{ id: string; title: string; date: string; location: string; image: string; }[]>([]);
   const [eventDetails, setEventDetails] = useState({ title: "", date: "", location: "", image: "" });
@@ -23,11 +25,20 @@ export default function Events() {
     <div className="min-h-screen bg-gradient-to-r from-purple-900 via-black to-gray-900 p-5 text-white">
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
-        <button onClick={() => setIsOpen(true)}>
-          <FaBars size={32} className="text-white hover:text-purple-400 transition" />
-        </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">Puberty Function</h2>
-      </header>
+  {/* Left: Hamburger Menu */}
+  <button onClick={() => setIsOpen(true)}>
+    <FaBars size={32} className="text-white hover:text-purple-400 transition" />
+  </button>
+
+  {/* Center: Title */}
+  <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Puberty Function</h2>
+
+  {/* Right: Back Button */}
+  <button onClick={() => router.back()}>
+    <FaArrowLeft size={28} className="text-white hover:text-purple-400 transition" />
+  </button>
+</header>
+
 
       {/* Massive Sidebar */}
       <nav
@@ -87,22 +98,23 @@ export default function Events() {
 
      
 
-      {/* Registered Events */}
-      <div>
-        <h2 className="text-4xl font-semibold text-center my-10"></h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {events.map((event) => (
-            <div key={event.id} className="relative overflow-hidden rounded-xl shadow-lg min-h-[250px] flex flex-col justify-end p-4 bg-cover bg-center" style={{ backgroundImage: `url(${event.image})` }}>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black"></div>
-              <div className="relative">
-                <h3 className="text-white text-xl font-bold">{event.title}</h3>
-                <p className="text-white text-sm">📅 {new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-white text-sm">📍 {event.location}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* About & Contact Section */}
+<div className="mt-20 px-8">
+  {/* About */}
+  <section className="mb-16">
+  <div className="w-full max-w-6xl mx-auto">
+    <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
+    <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
+    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-6xl mx-auto">
+    A puberty function, also known as a coming-of-age ceremony, is a traditional celebration observed in many cultures to mark a young individual's transition into adolescence. This event is especially significant in South Indian customs, where it is celebrated when a girl experiences her first menstruation, symbolizing her growth from childhood into womanhood. The function is a blend of cultural, emotional, and spiritual elements, honoring the natural process of maturity while surrounding the young girl with love, support, and blessings from family and the community.
+
+The ceremony typically includes rituals, prayers, and symbolic offerings to invoke health, prosperity, and protection. The girl is often adorned in traditional attire, and the event is celebrated with great enthusiasm, featuring music, food, decorations, and gifts. Elders share wisdom and guidance, helping the young girl understand and embrace the responsibilities and changes that come with this new phase of life.
+
+While deeply rooted in tradition, the puberty function also serves as a platform to educate and empower young girls, promoting self-awareness and confidence. It is a cherished milestone that celebrates natural growth, honors femininity, and strengthens familial and cultural bonds, making it a memorable and meaningful event in a girl's life.
+</p>
+  </div>
+  </section>
+</div> 
     </div>
   );
 }

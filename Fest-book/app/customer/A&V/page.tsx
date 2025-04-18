@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FaArrowLeft, FaBars } from 'react-icons/fa';
 import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings } from "react-icons/fi";
 import Link from "next/link";
-import router from "next/router";
 import { useRouter } from "next/navigation";
 
 export default function Events() {
@@ -24,6 +23,7 @@ export default function Events() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-900 via-black to-gray-900 p-5 text-white">
+      {/* Header */}
       <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
   {/* Left: Hamburger Menu */}
   <button onClick={() => setIsOpen(true)}>
@@ -31,7 +31,7 @@ export default function Events() {
   </button>
 
   {/* Center: Title */}
-  <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Marriage & Wedding</h2>
+  <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Anniversaries</h2>
 
   {/* Right: Back Button */}
   <button onClick={() => router.back()}>
@@ -74,11 +74,10 @@ export default function Events() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {/* Event Cards with Gradients */}
         {[
-          
+          {title: "Cake Arrangement",img: "/Cake.jpeg",desc: "Customized cakes for every celebration.",link: "/services/cake-arrangement"},
           { title: "Photography & Videography", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
-          { title: "DJ & Sound Systems", img: "/DJ & Sound.jpg", desc: "Professional DJ services for all events." },
+          {title: "Balloon Decoration",img: "/Balloon Decoration.jpg",desc: "Creative balloon setups for parties & events.",link: "/services/balloon-decoration"},
           {title: "Beautician",img: "/beautician.jpg",desc: "Bridal makeup, hairstyling & grooming services."},
-          { title: "Floral Decorations", img: "/floral.jpg", desc: "Beautiful floral arrangements for your event." },
           { title: "Invitation Cards", img: "/Invitation Cards.jpg", desc: "Design custom invitation cards." },
           { title: "Food Supply", img: "/Food Supply.jpg", desc: "Multi-cuisine catering services available." },
           { title: "Stage Decorations", img: "/Stage Decorations.jpg", desc: "Stage decoration with floral & themes." },
@@ -96,19 +95,19 @@ export default function Events() {
         ))}
       </div>
 
-{/* About & Contact Section */}
+     {/* About & Contact Section */}
 <div className="mt-20 px-8">
   {/* About */}
   <section className="mb-16">
   <div className="w-full max-w-6xl mx-auto">
     <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
     <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
-    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-6xl mx-auto">
-    Marriage is a culturally and legally recognized union between individuals that signifies a lifelong commitment, love, and mutual support. It serves as the foundation for building families and nurturing social bonds. While the concept of marriage exists across the globe, the customs, rituals, and beliefs surrounding it vary widely, influenced by tradition, religion, and societal values.
-    A wedding, on the other hand, is the ceremonial celebration of this union. It marks the formal beginning of married life and is often a grand occasion filled with meaningful rituals, vibrant traditions, and joyous gatherings. Weddings can be deeply personal or lavish public events, depending on cultural heritage and individual preferences. From engagement and pre-wedding festivities to the main ceremony and post-wedding celebrations, each step is imbued with symbolism and emotion.
-    Weddings bring people together, celebrating love, unity, and the coming together of two families. Whether it’s a traditional Hindu wedding, a Christian ceremony, a Muslim Nikah, or a civil registry wedding, the essence remains the same—celebrating a deep and enduring bond.
-    In today's evolving world, weddings continue to adapt, blending age-old traditions with modern innovations. From destination weddings and themed events to sustainable celebrations and digital invitations, the way we celebrate marriage continues to reflect changing times while honoring timeless values.
-</p>
+    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-7xl mx-auto">
+    Anniversaries are special occasions that commemorate important milestones in life, particularly the celebration of love, commitment, and togetherness. Whether it's a wedding anniversary, a work anniversary, or any personal achievement, these moments serve as meaningful reminders of the journey, growth, and shared experiences over time. Among the most cherished are wedding anniversaries, which celebrate the enduring bond between partners, highlighting the love, trust, and support that have strengthened their relationship through the years.
+
+Anniversaries are often marked with heartfelt gestures, gifts, celebrations, or quiet moments of reflection. Couples may revisit memories, recreate special dates, or simply spend time together, expressing gratitude for the path they’ve walked hand in hand. Friends and family may also join in to offer blessings and share in the joy of the occasion.
+
+Beyond romantic relationships, anniversaries can also honor achievements such as years of service in a job, the founding of an organization, or the remembrance of a significant event. No matter the type, anniversaries remind us to pause, appreciate the past, and look forward to the future. They are moments of joy, reflection, and renewed commitment, making them deeply personal yet universally significant celebrations of life’s meaningful chapters.</p>
   </div>
   </section>
 </div> 

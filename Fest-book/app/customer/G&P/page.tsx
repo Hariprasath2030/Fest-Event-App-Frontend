@@ -31,7 +31,7 @@ export default function Events() {
   </button>
 
   {/* Center: Title */}
-  <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Birthday Party</h2>
+  <h2 className="text-4xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Graduation Parties</h2>
 
   {/* Right: Back Button */}
   <button onClick={() => router.back()}>
@@ -70,31 +70,30 @@ export default function Events() {
       </nav>
 
 {/* Event Registration Section */}
-      <h2 className="text-4xl font-bold text-center my-10"></h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
-        {/* Event Cards with Gradients */}
-        {[
-          {title: "Cake Arrangement",img: "/Cake.jpeg",desc: "Customized cakes for every celebration.",link: "/services/cake-arrangement"},
-          { title: "Photography & Videography", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
-          {title: "Balloon Decoration",img: "/Balloon Decoration.jpg",desc: "Creative balloon setups for parties & events.",link: "/services/balloon-decoration"},
-          { title: "DJ & Sound Systems", img: "/DJ & Sound.jpg", desc: "Professional DJ services for all events." },
-          {title: "Beautician",img: "/beautician.jpg",desc: "Bridal makeup, hairstyling & grooming services."},
-          { title: "Invitation Cards", img: "/Invitation Cards.jpg", desc: "Design custom invitation cards." },
-          { title: "Food Supply", img: "/Food Supply.jpg", desc: "Multi-cuisine catering services available." },
-          { title: "Stage Decorations", img: "/Stage Decorations.jpg", desc: "Stage decoration with floral & themes." },
-          { title: "Vehicle Arrangement", img: "/vehicle.jpg", desc: "Wedding car decoration & transport services." }
-          
-        ].map((event, index) => (
-          <div key={index} className="relative overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300">
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80"></div>
-            <img src={event.img} alt={event.title} className="w-full h-48 object-cover rounded-xl" />
-            <div className="absolute bottom-0 p-4">
-              <h3 className="text-2xl font-semibold">{event.title}</h3>
-              <p className="text-white text-sm">{event.desc}</p>
-            </div>
-          </div>
-        ))}
+<h2 className="text-4xl font-bold text-center my-10">Event Services</h2>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
+  {/* Event Cards with Gradients */}
+  {[
+    { title: "Cake Arrangement", img: "/Cake.jpeg", desc: "Customized cakes for every celebration.", link: "/services/cake-arrangement" },
+    { title: "Photography & Videography", img: "/Photo & Video Shoot.jpg", desc: "Capture your event's best moments." },
+    { title: "Balloon Decoration", img: "/Balloon Decoration.jpg", desc: "Creative balloon setups for parties & events.", link: "/services/balloon-decoration" },
+    { title: "DJ & Sound Systems", img: "/DJ & Sound.jpg", desc: "Professional DJ services for all events." },
+    { title: "Food Supply", img: "/Food Supply.jpg", desc: "Multi-cuisine catering services available." },
+    { title: "Stage Decorations", img: "/Stage Decorations.jpg", desc: "Stage decoration with floral & themes." },
+    { title: "Vehicle Arrangement", img: "/vehicle.jpg", desc: "Wedding car decoration & transport services." },
+    { title: "Venue Fee", img: "/venue.jpg", desc: "Venue booking and setup (if applicable)." },
+    { title: "Gifts Shopes", img: "/gift.jpg", desc: "Memorable gifts and goodies for the graduate." }
+  ].map((event, index) => (
+    <div key={index} className="relative overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300">
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80"></div>
+      <img src={event.img} alt={event.title} className="w-full h-48 object-cover rounded-xl" />
+      <div className="absolute bottom-0 p-4">
+        <h3 className="text-2xl font-semibold text-white">{event.title}</h3>
+        <p className="text-white text-sm">{event.desc}</p>
       </div>
+    </div>
+  ))}
+</div>
 
      {/* About & Contact Section */}
 <div className="mt-20 px-8">
@@ -104,11 +103,12 @@ export default function Events() {
     <div className="h-1 bg-white mx-auto mb-6 rounded-full"></div>
     <h2 className="text-4xl font-bold text-center mb-10 text-white">About</h2>
     <p className="text-gray-300 text-lg leading-relaxed text-center max-w-7xl mx-auto">
-    A birthday party is a joyous occasion celebrated to mark the anniversary of a person's birth. It is a time for friends and family to come together to celebrate life, express love, and make lasting memories. Birthday parties can vary in size and style, ranging from intimate gatherings with close friends and family to grand celebrations with elaborate themes and decorations. The common thread, however, is the focus on honoring the individual and making them feel special.
+    Graduation parties are vibrant and heartfelt celebrations that mark the successful completion of an academic journey. Whether it's from school, college, or university, graduating represents years of dedication, growth, and achievement. A graduation party provides the perfect opportunity to honor this significant milestone, celebrating not only academic success but also the personal transformation and hard work behind it.
 
-Traditionally, birthday parties include various fun activities such as games, music, and dancing, depending on the age group and preferences of the person celebrating. For children, it might include bouncy castles, face painting, and party favors, while adults may enjoy dinner parties, themed events, or a night out. A key highlight of any birthday party is the cutting of the birthday cake, often accompanied by singing "Happy Birthday" and making a wish.
+These gatherings bring together family, friends, teachers, and mentors to recognize the graduate’s accomplishments and to share in their joy. They often include speeches, gifts, food, music, and memorable activities that reflect the graduate’s personality and future aspirations. Graduation parties are also a time to express gratitude toward those who supported the journey—parents, educators, and peers—who played a key role in shaping the path to success.
 
-Guests typically bring gifts, which can range from personal items to creative, unique presents that reflect the celebrant's interests. Whether it's a casual affair or an extravagant event, birthday parties are a time to celebrate the individual, reflect on the past year, and look forward to the year ahead with optimism and joy. It’s a day that brings people together, fostering love and connection through shared happiness.</p>
+Beyond celebration, these events symbolize a transition into a new chapter—whether it's higher education, a new career, or other life pursuits. It’s a moment filled with pride, emotion, and excitement about the future. Graduation parties are not just about the end of a phase, but the beginning of a new adventure, offering an uplifting space to dream big, inspire others, and create lasting memories with those who matter most.
+</p>
   </div>
   </section>
 </div> 
