@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../organiser/contexts/AuthContext";
@@ -7,21 +7,16 @@ import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import { FiX, FiHome, FiCalendar, FiBook, FiUser, FiSettings } from "react-icons/fi";
 
-export default function DashboardPage() {
+export default function page() {
     const { isAuthenticated, loading, userData, logout } = useAuth();
-    const router = useRouter();
-    const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state
-
-    useEffect(() => {
-        if (isAuthenticated || loading) {
-            router.push("/organiser/dashboard");
-        }
-    }, [loading, isAuthenticated, router]);
+    const router = useRouter();// Sidebar toggle state
 
     const handleLogout = () => {
         logout();
         router.push("/organiser/login");
     };
+
+    const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900 text-white  w-full">
@@ -84,19 +79,9 @@ export default function DashboardPage() {
                 </ul>
             </nav>
 
-            {/* Main Content */}
-            <main className="p-8">
-                <p className="mb-4">Hello, {userData?.name || "User"} 👋</p>
 
-                <div className="mt-6">
-                    <h3 className="text-xl font-bold mb-2">Your Events</h3>
-                    <ul className="list-disc ml-6 text-white">
-                        <li>Event 1</li>
-                        <li>Event 2</li>
-                        {/* Replace with dynamic content later */}
-                    </ul>
-                </div>
-            </main>
+            <h1>Orgainser detsils</h1>
         </div>
-    );
+    )
 }
+

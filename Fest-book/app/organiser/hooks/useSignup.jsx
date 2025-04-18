@@ -19,7 +19,7 @@ const useSignup = () => {
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/customer/customerSignup', {
+      const res = await fetch('https://fest-event-app-backend.onrender.com/api/customer/customerSignup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const useSignup = () => {
 
       if (res.status === 200) {
         login(data.token, data.user);
-        router.push("/organiser/login"); 
+        router.push("/organiser/login");
         alert("Organiser Registered Successfully")// ✅ REDIRECT to dashboard
       } else {
         alert(data.message || "Login failed");

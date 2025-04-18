@@ -1,5 +1,5 @@
-"use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+"use client"
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
@@ -10,31 +10,29 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const storedData = localStorage.getItem("user_data");
-        if (storedData) {
-            try {
-                const parsed = JSON.parse(storedData);
-                if (parsed?.userToken && parsed?.user) {
-                    setToken(parsed.userToken);
-                    setUserData(parsed.user);
-                    setIsAuthenticated(true);
-                }
-            } catch (err) {
-                console.error("Error parsing user data:", err);
+        try {
+            const storedData = JSON.parse(localStorage.getItem('user_data'));
+            if (storedData && storedData.userToken && storedData.user) {
+                setToken(storedData.userToken);
+                setUserData(storedData.user);
+                setIsAuthenticated(true);
             }
+        } catch (error) {
+            console.error("Failed to parse user data from localStorage", error);
+        } finally {
+            setLoading(false); // Loading complete
         }
-        setLoading(false);
     }, []);
 
-    const login = (newToken, newUser) => {
-        localStorage.setItem("user_data", JSON.stringify({ userToken: newToken, user: newUser }));
+    const login = (newToken, newData) => {
+        localStorage.setItem('user_data', JSON.stringify({ userToken: newToken, user: newData }));
         setToken(newToken);
-        setUserData(newUser);
+        setUserData(newData);
         setIsAuthenticated(true);
     };
 
     const logout = () => {
-        localStorage.removeItem("user_data");
+        localStorage.removeItem('user_data');
         setToken(null);
         setUserData(null);
         setIsAuthenticated(false);
@@ -42,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ token, userData, isAuthenticated, loading, login, logout }}>
-            {!loading && children}
+            {!loading && children} {/* Render children only when loading is false */}
         </AuthContext.Provider>
     );
 };

@@ -2,15 +2,16 @@
 import { CircleX } from "lucide-react";
 import { Card, Form, Input, Button, Spin, Alert, Typography } from 'antd';
 import Link from "next/link";
-import loginImage from "../../../../public/signin.jpg";
+import loginImage from "../../../../public/org.jpg";
 import Image from 'next/image';
-import useLogin from '../../hooks/useLogin'; 
+import useLogin from '../../hooks/useLogin';
 import '../form.css';
 
 const Login = () => {
   const { loading, error, LoginUser } = useLogin();
 
   const handleLogin = async (values: any) => {
+
     await LoginUser(values);
   };
 
@@ -42,31 +43,44 @@ const Login = () => {
 
           {/* Right - Form */}
           <div className="w-full md:w-1/2">
-            <Typography.Title level={3} className="title">
-              Organiser Sign In
+            <div className="flex justify-center items-center">
+              <Image src="/IconOnly.png" alt="Logo" width={70} height={70} />
+            </div>
+            <Typography.Title level={2} style={{ color: "#ffffff", textAlign: "center" }}>
+              Organiser Login
             </Typography.Title>
-            <Typography.Text type="secondary" strong className="slogan">
+
+            <Typography.Text strong style={{ color: "#cbd5e1", display: "block", textAlign: "center" }}>
               Log in to your Account
             </Typography.Text>
 
+
             <Form layout="vertical" onFinish={handleLogin} autoComplete="off">
               <Form.Item
-                label="Email"
+                label={<span className="text-white font-semibold">Email</span>}
                 name="email"
                 rules={[
-                  { required: true, message: 'Please input your Email!' },
-                  { type: 'email', message: 'The input is not a valid Email!' },
+                  { required: true, message: "Please input your Email!" },
+                  { type: "email", message: "The input is not a valid Email!" },
                 ]}
               >
-                <Input size="large" placeholder="Enter your Email" />
+                <Input
+                  size="large"
+                  placeholder="Enter your Email"
+                  className="bg-gray-800 text-white border border-gray-600 rounded-lg placeholder-gray-400 hover:border-indigo-500 transition"
+                />
               </Form.Item>
 
               <Form.Item
-                label="Password"
+                label={<span className="text-white font-semibold">Password</span>}
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{ required: true, message: "Please input your password!" }]}
               >
-                <Input.Password size="large" placeholder="Enter your Password" />
+                <Input.Password
+                  size="large"
+                  placeholder="Enter your Password"
+                  className="bg-gray-800 text-white border border-gray-600 rounded-lg placeholder-gray-400 hover:border-indigo-500 transition"
+                />
               </Form.Item>
 
               {error && (
@@ -75,7 +89,7 @@ const Login = () => {
                   type="error"
                   showIcon
                   closable
-                  className="alert"
+                  className="mt-4 rounded-lg bg-gray-900 text-white border-0"
                 />
               )}
 
@@ -87,7 +101,7 @@ const Login = () => {
                   className="btn"
                   disabled={loading}
                 >
-                  {loading ? <Spin /> : 'Sign In'}
+                  {loading ? <Spin /> : 'Login In'}
                 </Button>
               </Form.Item>
 

@@ -17,6 +17,9 @@ if (!clerkPublishableKey) {
 export const metadata = {
   title: 'Fest-Book App',
   description: 'Event management app!',
+  icons: {
+    icon: "/icon.png", 
+  },
 };
 
 interface RootLayoutProps {

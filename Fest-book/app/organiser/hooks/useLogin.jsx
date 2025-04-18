@@ -14,7 +14,7 @@ const useLogin = () => {
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/customer/customerLogin', {
+      const res = await fetch('https://fest-event-app-backend.onrender.com/api/customer/customerLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
