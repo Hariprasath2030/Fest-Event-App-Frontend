@@ -42,10 +42,12 @@ export default function Events() {
                 </button>
               </div>
         <ul className="mt-6 px-8 space-y-6 text-lg">
-          {[{ name: "Home", icon: <FiHome size={24} />, href: "/" },
-            { name: "Dashboard", icon: <FiHome size={24} />, href: "/customer/dashboard" },
-            { name: "Bookings", icon: <FiBook size={24} />, href: "/customer/dashboard/bookings" },
-            { name: "Settings", icon: <FiSettings size={24} />, href: "/custpmer/settings" },
+          {[
+           { name: 'Dashboard', icon: <FiHome size={24} />, href: '/customer/dashboard' },
+           { name: 'Events', icon: <FiCalendar size={24} />, href: '/customer/events' },
+           { name: 'Bookings', icon: <FiBook size={24} />, href: '/customer/dashboard/bookings' },
+           { name: 'Profile', icon: <FiUser size={24} />, href: '/profile' },
+           { name: 'Settings', icon: <FiSettings size={24} />, href: '/customer/settings' },
           ].map((link) => (
             <li key={link.name}>
               <Link href={link.href} className="flex items-center space-x-4 hover:text-purple-400 transition">

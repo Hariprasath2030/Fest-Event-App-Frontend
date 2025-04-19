@@ -12,42 +12,37 @@ import {
   FiUser,
   FiX,
 } from 'react-icons/fi';
-
-type EventType = {
-  _id: string;
-  eventName: string;
-  eventDate: string;
-  eventImage: string;
-  name: string;
-  email: string;
-};
+import axios from "axios";
 
 function DashboardHeader() {
+  interface Event {
+    _id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    // add other fields if needed
+  }
+  const [events, setEvents] = useState<Event[]>([]);
+
   const [isOpen, setIsOpen] = useState(false);
-  const [events, setEvents] = useState<EventType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch events from the backend
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch(
-          'https://fest-event-app-backend.onrender.com/api/events'
+        const response = await axios.get(
+          "https://fest-event-app-backend.onrender.com/api/events"
         );
-        if (!response.ok) throw new Error('Failed to fetch events');
-        const data = await response.json();
-        setEvents(data.events || []);
-      } catch (err: any) {
-        console.error('Fetch error:', err);
-        setError('Unable to fetch events. Please try again later.');
-      } finally {
-        setLoading(false);
+        setEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
       }
     };
 
     fetchEvents();
   }, []);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white w-screen">
@@ -78,9 +73,8 @@ function DashboardHeader() {
 
         {/* Sidebar */}
         <nav
-          className={`fixed top-0 left-0 h-full w-64 bg-gray-900 shadow-lg transform ${
-            isOpen ? 'translate-x-0' : '-translate-x-full'
-          } transition-transform duration-300 ease-in-out z-50`}
+          className={`fixed top-0 left-0 h-full w-64 bg-gray-900 shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
+            } transition-transform duration-300 ease-in-out z-50`}
         >
           <div className="flex justify-between items-center p-6 border-b border-gray-700">
             <h1 className="text-3xl font-bold">FestBook</h1>
@@ -108,40 +102,46 @@ function DashboardHeader() {
         </nav>
       </header>
 
-      {/* Event Section */}
-      <h2 className="text-4xl font-semibold text-center my-10">Registered Events</h2>
+      {/* Content */}
+      <main className="flex-1 p-6 overflow-y-auto">
+        <h2 className="text-xl sm:text-4xl font-bold mb-4">
+          Hello, {"Customers"} 👋
+        </h2>
 
-      {loading ? (
-        <p className="text-center text-lg">Loading events...</p>
-      ) : error ? (
-        <p className="text-center text-red-500">{error}</p>
-      ) : events.length === 0 ? (
-        <p className="text-center text-gray-400">No events registered yet.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {events.map((event) => (
-            <div
-              key={event._id}
-              className="relative overflow-hidden rounded-xl shadow-lg min-h-[250px] flex flex-col justify-end p-4 bg-cover bg-center"
-              style={{ backgroundImage: `url(${event.eventImage})` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black"></div>
-              <div className="relative">
-                <h3 className="text-white text-xl font-bold">{event.eventName}</h3>
-                <p className="text-white text-sm">
-                  {new Date(event.eventDate).toLocaleDateString()}
-                </p>
-                <p className="text-white text-sm mt-2">
-                  {event.name} - {event.email}
-                </p>
-              </div>
+        {/* Registered Organizers */}
+        <div>
+          <h2 className="text-3xl font-bold text-center mb-8">Events List</h2>
+
+          {events.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-2 md:px-10">
+              {events.map((event) => (
+                <Link
+                  key={event._id}
+                  href={`/organiser/events/${encodeURIComponent(event.title)}`}
+                  className="bg-black rounded-2xl shadow-lg hover:shadow-xl transition transform hover:scale-[1.03] duration-300 overflow-hidden"
+                >
+                  <div className="w-full h-48 sm:h-50 md:h-45 overflow-hidden">
+                    <img
+                      src={event.imageUrl}
+                      alt={event.title || "Event image"}
+                      className="w-full h-full object-cover hover:opacity-90 transition-opacity duration-200"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-yellow-300">{event.title}</h3>
+                    <p className="text-sm text-gray-300 mt-2 line-clamp-3">{event.description}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
+
+          ) : (
+            <p className="text-center text-gray-400">No events available yet.</p>
+          )}
         </div>
-      )}
+      </main>
     </div>
   );
 }
 
 export default DashboardHeader;
-  

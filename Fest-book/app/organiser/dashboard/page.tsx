@@ -68,7 +68,8 @@ export default function DashboardPage() {
 
                 {/* Sidebar */}
                 <nav
-                    className={`fixed top-0 left-0 h-full w-[240px] bg-black text-white z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+                    className={`fixed top-0 left-0 h-full w-[240px] bg-black text-white z-50 transform 
+                        ${isOpen ? "translate-x-0" : "-translate-x-full"
                         } transition-transform duration-300 ease-in-out shadow-2xl`}
                 >
                     <div className="flex justify-between items-center p-6 border-b border-gray-700">
