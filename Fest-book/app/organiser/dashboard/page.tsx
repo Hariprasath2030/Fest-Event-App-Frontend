@@ -13,9 +13,15 @@ export default function DashboardPage() {
     const { isAuthenticated, loading, userData, logout } = useAuth();
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
-    const [events, setEvents] = useState([]);
-    const [organisers, setOrganisers] = useState([]);
+    interface Event {
+        _id: string;
+        title: string;
+        description: string;
+        imageUrl: string;
+        // add other fields if needed
+    }
 
+    const [events, setEvents] = useState<Event[]>([]);
     useEffect(() => {
         if (loading || isAuthenticated) {
             router.push("/organiser/dashboard");
