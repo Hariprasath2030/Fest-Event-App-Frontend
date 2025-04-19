@@ -123,7 +123,7 @@ export default function DashboardPage() {
                             {events.map((event) => (
                                 <Link
                                     key={event._id}
-                                    href={`/organiser/event/`}
+                                    href={`/organiser/events/${encodeURIComponent(event.title)}`}
                                     className="bg-black rounded-2xl shadow-lg hover:shadow-xl transition transform hover:scale-[1.03] duration-300 overflow-hidden"
                                 >
                                     <div className="w-full h-48 sm:h-50 md:h-45 overflow-hidden">

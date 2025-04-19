@@ -159,9 +159,9 @@ export default function EventForm() {
 
                 <ul className="mt-6 px-8 space-y-5 text-md">
                     {[{ name: "Dashboard", icon: <FiHome size={22} />, href: "/organiser/dashboard" },
+                    { name: "Organiser Details", icon: <FiUser size={22} />, href: "/organiser/profile" },
                     { name: "Event Details", icon: <FiCalendar size={22} />, href: "/organiser/events" },
                     { name: "Bookings", icon: <FiBook size={22} />, href: "/organiser/dashboard/bookings" },
-                    { name: "Profile", icon: <FiUser size={22} />, href: "/organiser/profile" },
                     { name: "Settings", icon: <FiSettings size={22} />, href: "/organiser/settings" }].map((link) => (
                         <li key={link.name}>
                             <Link href={link.href} className="flex items-center space-x-3 hover:text-blue-400">
