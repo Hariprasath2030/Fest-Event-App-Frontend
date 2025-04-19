@@ -26,7 +26,7 @@ export default function Events() {
         <button onClick={() => setIsOpen(true)}>
           <FaBars size={32} className="text-white hover:text-purple-400 transition" />
         </button>
-        <h2 className="text-4xl font-bold text-center mx-auto my-10">All Types of Events</h2>
+        <h2 className="text-4xl font-bold text-center mx-auto my-10">About All Types of Events</h2>
       </header>
 
       {/* Massive Sidebar */}
@@ -69,7 +69,7 @@ export default function Events() {
   { title: "Anniversaries", img: "/Anniversary.jpg", desc: "Make your special day memorable.", link: "/customer/A&V" },
   { title: "Engagements", img: "/Engagement.jpg", desc: "Celebrate your love with a grand engagement.", link: "/customer/E&M" },
   { title: "Baby Showers", img: "/Baby Shower.jpg", desc: "Celebrate the arrival of your little one.", link: "/customer/B&S" },
-  { title: "Graduation Parties", img: "/Graduation.jpg", desc: "Celebrate your academic achievements.", link: "/customer/G&P" },
+  { title: "Graduation Parties", img: "/Graduation.jpg", desc: "  ", link: "/customer/G&P" },
   
 
   
@@ -86,25 +86,6 @@ export default function Events() {
     </div>
   </Link>
 ))}
-      </div>
-
-     
-
-      {/* Registered Events */}
-      <div>
-        <h2 className="text-4xl font-semibold text-center my-10">Upcoming Events</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {events.map((event) => (
-            <div key={event.id} className="relative overflow-hidden rounded-xl shadow-lg min-h-[250px] flex flex-col justify-end p-4 bg-cover bg-center" style={{ backgroundImage: `url(${event.image})` }}>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black"></div>
-              <div className="relative">
-                <h3 className="text-white text-xl font-bold">{event.title}</h3>
-                <p className="text-white text-sm">📅 {new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-white text-sm">📍 {event.location}</p>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

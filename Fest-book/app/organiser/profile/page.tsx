@@ -1,84 +1,153 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { FiHome, FiCalendar, FiBook, FiUser, FiX, FiSettings } from "react-icons/fi";
+import {
+    FiHome,
+    FiCalendar,
+    FiBook,
+    FiUser,
+    FiX,
+    FiSettings,
+} from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../organiser/contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function OrganiserForm() {
     const { isAuthenticated, loading, userData, logout } = useAuth();
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
+    const [editingId, setEditingId] = useState<string | null>(null);
+
     const [organiserDetails, setOrganiserDetails] = useState({
         name: "",
         phone: "",
         address: "",
         eventId: "",
         eventName: "",
-        imageUrls: "", // comma-separated input field
+        imageUrls: "",
     });
 
     const [organisers, setOrganisers] = useState<
-        { _id: string; name: string; phone: string; address: string; eventId: number; eventName: string; imageUrls: string[] }[]
+        {
+            _id: string;
+            name: string;
+            phone: string;
+            address: string;
+            eventId: number;
+            eventName: string;
+            imageUrls: string[];
+        }[]
     >([]);
 
-    // Fetching organisers on component mount
+    // Fetch organisers on component mount
     useEffect(() => {
         const fetchOrganisers = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/organiserdetails");
-                const data = await response.json();
-                setOrganisers(Array.isArray(data.organisers) ? data.organisers : []);
+                const response = await axios.get(
+                    "https://fest-event-app-backend.onrender.com/api/organiserdetails"
+                );
+                setOrganisers(response.data);
             } catch (error) {
                 console.error("Error fetching organisers:", error);
-                setOrganisers([]); // fallback in case of fetch failure
             }
         };
-
 
         fetchOrganisers();
     }, []);
 
-    // Handle form input changes
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setOrganiserDetails({ ...organiserDetails, [e.target.name]: e.target.value });
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        setOrganiserDetails({
+            ...organiserDetails,
+            [e.target.name]: e.target.value,
+        });
     };
 
-    // Handle form submission
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleEdit = (org: (typeof organisers)[0]) => {
+        setOrganiserDetails({
+            name: org.name,
+            phone: org.phone,
+            address: org.address,
+            eventId: org.eventId.toString(),
+            eventName: org.eventName,
+            imageUrls: org.imageUrls.join(", "),
+        });
+        setEditingId(org._id);
+    };
 
-        // Convert comma-separated imageUrls string to array
-        const formattedDetails = {
-            ...organiserDetails,
-            imageUrls: organiserDetails.imageUrls.split(",").map((url) => url.trim()),
-        };
+    const handleDelete = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this organizer?")) return;
 
         try {
-            const response = await fetch("http://localhost:5000/api/organiserdetails", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formattedDetails),
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to register organiser");
-            }
-
-            const newOrganiser = await response.json();
-            setOrganisers([...organisers, newOrganiser]);
-            setOrganiserDetails({ name: "", phone: "", address: "", eventId: "", eventName: "", imageUrls: "" });
-
-            alert("Organizer Registered Successfully!");
+            await axios.delete(
+                `https://fest-event-app-backend.onrender.com/api/organiserdetails/${id}`
+            );
+            setOrganisers(organisers.filter((org) => org._id !== id));
         } catch (error) {
-            console.error("Error registering organiser:", error);
-            alert("Error registering organiser");
+            console.error("Error deleting organiser:", error);
+            alert("Failed to delete organizer.");
         }
     };
 
-    // Logout handler
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const formattedDetails = {
+            ...organiserDetails,
+            imageUrls: organiserDetails.imageUrls
+                .split(",")
+                .map((url) => url.trim()),
+        };
+
+        try {
+            const url = editingId
+                ? `https://fest-event-app-backend.onrender.com/api/organiserdetails/${editingId}`
+                : `https://fest-event-app-backend.onrender.com/api/organiserdetails`;
+
+            const method = editingId ? "PUT" : "POST";
+
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formattedDetails),
+            });
+
+            if (!response.ok) throw new Error("Failed to submit organizer");
+
+            const result = await response.json();
+
+            if (editingId) {
+                setOrganisers((prev) =>
+                    prev.map((org) => (org._id === editingId ? result : org))
+                );
+            } else {
+                setOrganisers((prev) => [...prev, result]);
+            }
+
+            setOrganiserDetails({
+                name: "",
+                phone: "",
+                address: "",
+                eventId: "",
+                eventName: "",
+                imageUrls: "",
+            });
+            setEditingId(null);
+
+            alert(editingId ? "Organizer updated successfully!" : "Organizer registered successfully!");
+            router.push("/organiser/dashboard");
+        } catch (error) {
+            console.error("Error submitting organizer:", error);
+            alert("Error submitting organizer");
+        }
+    };
+
     const handleLogout = () => {
         logout();
         if (confirm("Are you sure you want to logout")) {
@@ -87,13 +156,15 @@ export default function OrganiserForm() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white">
+        <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white w-screen">
             {/* Header */}
             <header className="flex justify-between items-center px-8 py-6 text-gray-200 h-24 w-full bg-black/70 shadow-lg rounded-xl relative">
                 <button onClick={() => setIsOpen(true)}>
                     <FaBars size={36} className="text-white hover:text-blue-400 transition" />
                 </button>
-                <h2 className="text-3xl sm:text-2xl font-bold hover:text-yellow-400 transition text-center flex-1">Organizer Registration Details</h2>
+                <h2 className="text-3xl sm:text-2xl font-bold hover:text-yellow-400 transition text-center flex-1">
+                    Organizer Details
+                </h2>
             </header>
 
             {/* Sidebar */}
@@ -102,7 +173,6 @@ export default function OrganiserForm() {
                     } transition-transform duration-300 ease-in-out shadow-2xl`}
             >
                 <div className="flex justify-between items-center p-6 border-b border-gray-700">
-                    {/* Logo and Title */}
                     <div className="flex items-center space-x-3">
                         <Image src="/icon.png" alt="Logo" width={40} height={40} className="rounded-full" />
                         <h1 className="text-2xl font-bold">Organiser</h1>
@@ -113,11 +183,13 @@ export default function OrganiserForm() {
                 </div>
 
                 <ul className="mt-6 px-8 space-y-6 text-md">
-                    {[{ name: "Dashboard", icon: <FiHome size={24} />, href: "/organiser/dashboard" },
-                    { name: "Organiser Details", icon: <FiUser size={24} />, href: "/organiser/profile" },
-                    { name: "Add Events", icon: <FiCalendar size={24} />, href: "/organiser/events" },
-                    { name: "Bookings", icon: <FiBook size={24} />, href: "/organiser/dashboard/bookings" },
-                    { name: "Settings", icon: <FiSettings size={24} />, href: "/organiser/settings" }].map((link) => (
+                    {[
+                        { name: "Dashboard", icon: <FiHome size={24} />, href: "/organiser/dashboard" },
+                        { name: "Organiser Details", icon: <FiUser size={24} />, href: "/organiser/profile" },
+                        { name: "Add Events", icon: <FiCalendar size={24} />, href: "/organiser/events" },
+                        { name: "Bookings", icon: <FiBook size={24} />, href: "/organiser/dashboard/bookings" },
+                        { name: "Settings", icon: <FiSettings size={24} />, href: "/organiser/settings" },
+                    ].map((link) => (
                         <li key={link.name}>
                             <Link href={link.href} className="flex items-center space-x-4 hover:text-blue-400 transition">
                                 {link.icon}
@@ -126,8 +198,8 @@ export default function OrganiserForm() {
                         </li>
                     ))}
                 </ul>
-                <br />
-                <div className="px-6 pb-6">
+                <br></br>
+                <div className="px-6 pb-6 mt-auto">
                     <button
                         onClick={handleLogout}
                         className="w-full bg-blue-900 hover:bg-yellow-500 transition text-white px-4 py-2 rounded-md"
@@ -148,7 +220,7 @@ export default function OrganiserForm() {
                             { id: "address", type: "text", label: "Address", placeholder: "Enter your address" },
                             { id: "eventId", type: "text", label: "Event ID", placeholder: "Enter your event ID" },
                             { id: "eventName", type: "text", label: "Event Name", placeholder: "Enter your event name" },
-                            { id: "imageUrls", type: "text", label: "Image URLs (comma-separated)", placeholder: "https://img1.com, https://img2.com" }
+                            { id: "imageUrls", type: "text", label: "Image URLs (comma-separated)", placeholder: "https://img1.com, https://img2.com" },
                         ].map((input) => (
                             <div key={input.id}>
                                 <label htmlFor={input.id} className="block text-sm font-medium">
@@ -166,17 +238,21 @@ export default function OrganiserForm() {
                                 />
                             </div>
                         ))}
-                        <button className="w-full p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
-                            Register Organizer
+
+                        <button
+                            type="submit"
+                            className={`w-full p-3 font-semibold rounded-md transition ${editingId ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700"
+                                } text-white`}
+                        >
+                            {editingId ? "Update Organizer" : "Register Organizer"}
                         </button>
                     </form>
                 </div>
             </div>
 
-            {/* Registered Organizers */}
+            {/* Registered Organisers */}
             <div>
                 <h2 className="text-4xl font-semibold text-center my-10">Registered Organizers</h2>
-
                 {organisers.length === 0 ? (
                     <p className="text-center text-gray-400">No organisers registered yet.</p>
                 ) : (
@@ -184,7 +260,7 @@ export default function OrganiserForm() {
                         {organisers.map((org) => (
                             <div
                                 key={org._id}
-                                className="rounded-xl shadow-lg bg-gray-800 p-4 space-y-4 transition hover:scale-105 hover:shadow-2xl"
+                                className="rounded-xl shadow-lg bg-gray-800 p-4 space-y-4 transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl"
                             >
                                 <div className="space-y-1">
                                     <h3 className="text-xl font-bold text-white">{org.eventName}</h3>
@@ -202,6 +278,20 @@ export default function OrganiserForm() {
                                             className="w-full h-24 object-cover rounded-md"
                                         />
                                     ))}
+                                </div>
+                                <div className="flex justify-between gap-2 mt-4">
+                                    <button
+                                        onClick={() => handleEdit(org)}
+                                        className="bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-2 rounded transition w-full sm:w-auto"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(org._id)}
+                                        className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded transition w-full sm:w-auto"
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         ))}

@@ -68,7 +68,7 @@ export default function Bookings() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white">
+    <div className="min-h-screen bg-gradient-to-r from-blue-900 via-black to-gray-900 p-5 text-white w-screen">
       {/* Success Popup */}
       {successMessage && (
         <div className="fixed top-5 right-5 bg-green-600 text-white px-6 py-3 rounded-md shadow-lg transition-opacity animate-fade-in-out">
