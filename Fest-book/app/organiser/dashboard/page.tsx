@@ -103,8 +103,8 @@ export default function DashboardPage() {
 
             {/* Content */}
             <main className="flex-1 p-6 overflow-y-auto">
-                <h2 className="text-xl sm:text-2xl font-bold mb-4">
-                    Hello, {organisers[0]?.name || "User"} 👋
+                <h2 className="text-xl sm:text-4xl font-bold mb-4">
+                    Hello, {"Organisers"} 👋
                 </h2>
 
                 {/* Registered Organizers */}
@@ -118,9 +118,9 @@ export default function DashboardPage() {
                                 <Link
                                     key={event._id}
                                     href={`/organiser/event/`}
-                                    className="bg-gray-900 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:scale-[1.03] duration-300 overflow-hidden"
+                                    className="bg-black rounded-2xl shadow-lg hover:shadow-xl transition transform hover:scale-[1.03] duration-300 overflow-hidden"
                                 >
-                                    <div className="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
+                                    <div className="w-full h-48 sm:h-50 md:h-45 overflow-hidden">
                                         <img
                                             src={event.imageUrl}
                                             alt={event.title || "Event image"}

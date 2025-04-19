@@ -184,7 +184,7 @@ export default function EventForm() {
 
             {/* Event Form */}
             <div className="flex justify-center mt-12 px-4">
-                <div className="bg-gray-900 p-8 rounded-xl shadow-lg w-full max-w-3xl">
+                <div className="bg-black p-8 rounded-xl shadow-lg w-full max-w-3xl">
                     <h2 className="text-2xl font-bold text-center mb-6">{editingId ? "Update" : "Create"} Event</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
@@ -241,7 +241,7 @@ export default function EventForm() {
                         {events.map((event) => (
                             <div
                                 key={event._id}
-                                className="bg-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105"
+                                className="bg-black p-4 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105"
                             >
                                 <img
                                     src={event.imageUrl}
